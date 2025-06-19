@@ -15,9 +15,13 @@ import {
   Zap,
   Target,
 } from "lucide-react"
+import { useState } from "react"
 import { ThemeToggle } from "../components/theme-toggle"
+import { ChatWindow } from "../components/chat-window"
 
 export default function LandingPage() {
+  const [isChatOpen, setIsChatOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors">
       {/* Navigation */}
@@ -26,7 +30,7 @@ export default function LandingPage() {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
               <div className="text-2xl font-bold text-slate-900 dark:text-white">
-                NextGen <span className="text-cyan-600 dark:text-cyan-400">Web Agency</span>
+                Azraq <span className="text-cyan-600 dark:text-cyan-400">Web Agency</span>
               </div>
             </div>
             <div className="hidden md:flex items-center space-x-8">
@@ -86,7 +90,10 @@ export default function LandingPage() {
               your digital transformation partner.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="group bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl">
+              <button
+                onClick={() => setIsChatOpen(true)}
+                className="group bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+              >
                 Talk to our AI Agent
                 <Bot className="w-5 h-5 group-hover:rotate-12 transition-transform" />
               </button>
@@ -186,7 +193,10 @@ export default function LandingPage() {
               Have questions about your project? Our AI agent is here to help 24/7. Get instant quotes, technical
               advice, and project guidance.
             </p>
-            <button className="group bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all flex items-center justify-center gap-2 mx-auto shadow-lg hover:shadow-xl">
+            <button
+              onClick={() => setIsChatOpen(true)}
+              className="group bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all flex items-center justify-center gap-2 mx-auto shadow-lg hover:shadow-xl"
+            >
               <Bot className="w-5 h-5 group-hover:bounce" />
               Talk to our AI Agent
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -286,7 +296,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="text-2xl font-bold mb-4">
-                NextGen <span className="text-cyan-400">Web Agency</span>
+                Azraq <span className="text-cyan-400">Web Agency</span>
               </div>
               <p className="text-slate-400 mb-6">
                 Building the future of web development with AI-powered solutions and human creativity.
@@ -335,7 +345,7 @@ export default function LandingPage() {
               <div className="space-y-3 text-slate-400">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  <span>hello@nextgenwebagency.com</span>
+                  <span>hello@azraqwebagency.com</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
@@ -350,17 +360,23 @@ export default function LandingPage() {
           </div>
 
           <div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-400">
-            <p>&copy; 2024 NextGen Web Agency. All rights reserved.</p>
+            <p>&copy; 2024 Azraq Web Agency. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
       {/* Floating AI Chat Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <button className="group bg-gradient-to-r from-cyan-500 to-violet-500 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105">
+      <div className="fixed bottom-6 right-6 z-40">
+        <button
+          onClick={() => setIsChatOpen(true)}
+          className="group bg-gradient-to-r from-cyan-500 to-violet-500 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
+        >
           <Bot className="w-6 h-6 group-hover:rotate-12 transition-transform" />
         </button>
       </div>
+
+      {/* Chat Window */}
+      <ChatWindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   )
 }

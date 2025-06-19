@@ -7,10 +7,10 @@ import { ThemeProvider } from "../components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "NextGen Web Agency - AI-Powered Web Development",
+  title: "Azraq Web Agency - AI-Powered Web Development",
   description:
     "Modern web applications built with AI. Full-stack development, AI integration, and MVP development for startups.",
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider defaultTheme="system" storageKey="nextgen-theme">
+        <ThemeProvider defaultTheme="system" storageKey="azraq-theme">
           {children}
         </ThemeProvider>
       </body>
