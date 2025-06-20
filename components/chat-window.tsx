@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import Markdown from "react-markdown";
 import { useState } from "react"
 import { X, Send, Bot, User, Minimize2, Maximize2 } from "lucide-react"
 import { stringify } from "querystring"
@@ -151,7 +151,12 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
                         : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white"
                     }`}
                   >
-                    <p className="text-sm">{message.content}</p>
+                    <div>{message.sender === 'bot' ? (
+                      <Markdown>{message.content}</Markdown>
+                      ):(
+                        message.content
+                      )}
+                    </div>
                   </div>
                   {message.sender === "user" && (
                     <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-full flex items-center justify-center flex-shrink-0">

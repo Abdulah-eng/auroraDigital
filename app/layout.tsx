@@ -19,6 +19,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Basic favicon (ICO format) */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        {/* Modern SVG favicon (optional) */}
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        {/* Apple Touch Icon (for iOS devices) */}
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {/* PWA Manifest (optional) */}
+        <link rel="manifest" href="/manifest.webmanifest" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider defaultTheme="system" storageKey="azraq-theme">
           {children}
