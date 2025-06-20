@@ -829,12 +829,12 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="bg-slate-900 dark:bg-slate-950 text-white py-8 sm:py-12 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-x-3">
             <div className="md:col-span-2">
               <div className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
                 Aurora <span className="text-cyan-400">Digital</span>
               </div>
-              <p className="text-slate-400 mb-3 sm:mb-4 text-sm sm:text-base">
+              <p className="text-slate-400 mb-3 sm:mb-4 text-sm sm:text-base max-w-lg">
                 Building the future of web development with AI-powered solutions and human creativity.
               </p>
               <div className="flex space-x-4">
