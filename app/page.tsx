@@ -75,6 +75,23 @@ export default function LandingPage() {
     return () => observer.disconnect()
   }, [])
 
+  const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const project = formData.get("project");
+    const form = {
+      name: name,
+      email: email,
+      message: project
+    }
+    const res = await fetch("/api/saveLead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+  }
   // Typewriter effect for hero text
   useEffect(() => {
     const currentFullText = heroTexts[currentTextIndex]
@@ -483,13 +500,13 @@ export default function LandingPage() {
             <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-6 sm:mb-8 animate-fade-in-up animation-delay-300 px-4 sm:px-0">
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-violet-600 bg-clip-text text-transparent">
-                  50+
+                  10+
                 </div>
                 <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Projects Delivered</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-violet-600 to-pink-600 bg-clip-text text-transparent">
-                  99%
+                  99.99%
                 </div>
                 <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Client Satisfaction</div>
               </div>
@@ -750,7 +767,7 @@ export default function LandingPage() {
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <form className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" onSubmit={formHandler}>
               <div className="space-y-4 sm:space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
