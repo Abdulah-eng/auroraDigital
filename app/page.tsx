@@ -16,6 +16,9 @@ import {
   Target,
   Menu,
   X,
+  Loader2,
+  CheckCircle,
+  AlertCircle,
 } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import { ThemeToggle } from "../components/theme-toggle"
@@ -36,6 +39,13 @@ export default function LandingPage() {
   const [isTyping, setIsTyping] = useState(true)
   const [hasUnreadMessage, setHasUnreadMessage] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [notification, setNotification] = useState<{
+    show: boolean
+    success: boolean
+    message: string
+  }>({ show: false, success: false, message: "" })
+  const formRef = useRef<HTMLFormElement>(null)
   const observerRef = useRef(null)
 
   const heroTexts = [
@@ -76,22 +86,55 @@ export default function LandingPage() {
   }, [])
 
   const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const project = formData.get("project");
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    const formData = new FormData(e.currentTarget)
+    const name = formData.get("name")
+    const email = formData.get("email")
+    const project = formData.get("project")
+    
     const form = {
       name: name,
       email: email,
       message: project
     }
-    const res = await fetch("/api/saveLead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+
+    try {
+      const res = await fetch("/api/saveLead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+
+      if (res.ok) {
+        setNotification({
+          show: true,
+          success: true,
+          message: "Form submitted successfully! We'll contact you soon."
+        })
+        // Clear form
+        if (formRef.current) {
+          formRef.current.reset()
+        }
+      } else {
+        throw new Error("Failed to submit form")
+      }
+    } catch (error) {
+      setNotification({
+        show: true,
+        success: false,
+        message: "Failed to submit form. Please try again."
+      })
+    } finally {
+      setIsSubmitting(false)
+      // Hide notification after 5 seconds
+      setTimeout(() => {
+        setNotification(prev => ({ ...prev, show: false }))
+      }, 5000)
+    }
   }
+
   // Typewriter effect for hero text
   useEffect(() => {
     const currentFullText = heroTexts[currentTextIndex]
@@ -333,7 +376,49 @@ export default function LandingPage() {
           )}
         </div>
       </nav>
-
+      {/* Notification Toast */}
+      {notification.show && (
+        <div className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 max-w-xs w-full sm:max-w-sm ${
+          notification.success ? 'bg-green-50 dark:bg-green-900' : 'bg-red-50 dark:bg-red-900'
+        } rounded-lg shadow-lg border ${
+          notification.success ? 'border-green-200 dark:border-green-800' : 'border-red-200 dark:border-red-800'
+        } p-4 transform transition-all duration-300 ${
+          notification.show ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+        }`}>
+          <div className="flex items-start">
+            <div className="flex-shrink-0">
+              {notification.success ? (
+                <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400" />
+              ) : (
+                <AlertCircle className="h-5 w-5 text-red-500 dark:text-red-400" />
+              )}
+            </div>
+            <div className="ml-3">
+              <p className={`text-sm font-medium ${
+                notification.success ? 'text-green-800 dark:text-green-100' : 'text-red-800 dark:text-red-100'
+              }`}>
+                {notification.message}
+              </p>
+            </div>
+            <div className="ml-auto pl-3">
+              <div className="-mx-1.5 -my-1.5">
+                <button
+                  type="button"
+                  onClick={() => setNotification(prev => ({ ...prev, show: false }))}
+                  className={`inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                    notification.success 
+                      ? 'bg-green-50 text-green-500 hover:bg-green-100 focus:ring-green-600 focus:ring-offset-green-50 dark:bg-green-900 dark:hover:bg-green-800'
+                      : 'bg-red-50 text-red-500 hover:bg-red-100 focus:ring-red-600 focus:ring-offset-red-50 dark:bg-red-900 dark:hover:bg-red-800'
+                  }`}
+                >
+                  <span className="sr-only">Dismiss</span>
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Enhanced Hero Section */}
       <section className="relative bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 py-12 sm:py-20 lg:py-32 overflow-hidden">
         {/* Enhanced Animated Background SVG */}
@@ -737,7 +822,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Lead Capture Section */}
+       {/* Lead Capture Section */}
       <section id="contact" className="py-12 sm:py-20 bg-white dark:bg-slate-950">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
@@ -767,7 +852,11 @@ export default function LandingPage() {
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" onSubmit={formHandler}>
+            <form 
+              ref={formRef}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" 
+              onSubmit={formHandler}
+            >
               <div className="space-y-4 sm:space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
@@ -777,8 +866,10 @@ export default function LandingPage() {
                     type="text"
                     id="name"
                     name="name"
+                    required
                     className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all transform focus:scale-105 text-sm sm:text-base"
                     placeholder="John Doe"
+                    disabled={isSubmitting}
                   />
                 </div>
                 <div>
@@ -789,8 +880,10 @@ export default function LandingPage() {
                     type="email"
                     id="email"
                     name="email"
+                    required
                     className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all transform focus:scale-105 text-sm sm:text-base"
                     placeholder="john@example.com"
+                    disabled={isSubmitting}
                   />
                 </div>
               </div>
@@ -803,17 +896,27 @@ export default function LandingPage() {
                   id="project"
                   name="project"
                   rows={6}
+                  required
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all resize-none transform focus:scale-105 text-sm sm:text-base"
                   placeholder="Tell us about your project, goals, and timeline..."
+                  disabled={isSubmitting}
                 ></textarea>
               </div>
 
               <div className="md:col-span-2 text-center">
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-8 sm:px-12 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 btn-responsive"
+                  disabled={isSubmitting}
+                  className="bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-8 sm:px-12 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 btn-responsive disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 mx-auto"
                 >
-                  Send Project Details
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send Project Details"
+                  )}
                 </button>
               </div>
             </form>
