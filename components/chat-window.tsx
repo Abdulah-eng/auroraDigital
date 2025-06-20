@@ -1,10 +1,9 @@
 "use client"
 
 import type React from "react"
-import Markdown from "react-markdown";
-import { useState } from "react"
+import Markdown from "react-markdown"
+import { useState, useRef, useEffect } from "react"
 import { X, Send, Bot, User, Minimize2, Maximize2 } from "lucide-react"
-import { stringify } from "querystring"
 
 interface Message {
   id: string
@@ -16,13 +15,14 @@ interface Message {
 interface ChatWindowProps {
   isOpen: boolean
   onClose: () => void
+  onNotificationChange?: (hasUnread: boolean) => void
 }
 
-export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
+export function ChatWindow({ isOpen, onClose, onNotificationChange }: ChatWindowProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "Hi! I'm Azraq's AI assistant. How can I help you with your web development project today?",
+      content: "Hi! I'm Aurora Digital's AI assistant. How can I help you with your web development project today?",
       sender: "bot",
       timestamp: new Date(),
     },
@@ -30,6 +30,31 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
   const [inputValue, setInputValue] = useState("")
   const [isMinimized, setIsMinimized] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
+  const [pendingResponse, setPendingResponse] = useState(false)
+
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
+
+  // Handle notification logic
+  useEffect(() => {
+    if (onNotificationChange) {
+      onNotificationChange(pendingResponse && !isOpen)
+    }
+  }, [pendingResponse, isOpen, onNotificationChange])
+
+  // Clear notification when chat is opened
+  useEffect(() => {
+    if (isOpen && pendingResponse) {
+      setPendingResponse(false)
+    }
+  }, [isOpen, pendingResponse])
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return
@@ -44,42 +69,61 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
     setMessages((prev) => [...prev, userMessage])
     setInputValue("")
     setIsTyping(true)
+    setPendingResponse(true)
 
-    // AI response
-    const botResponse: Message = {
-      id: (Date.now() + 1).toString(),
-      content: await getBotResponse(inputValue),
-      sender: "bot",
-      timestamp: new Date(),
+    try {
+      // AI response
+      const botResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        content: await getBotResponse(inputValue),
+        sender: "bot",
+        timestamp: new Date(),
+      }
+      setMessages((prev) => [...prev, botResponse])
+
+      // If chat is closed when response arrives, show notification
+      if (!isOpen) {
+        setPendingResponse(true)
+      } else {
+        setPendingResponse(false)
+      }
+    } catch (error) {
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "Sorry, I'm having trouble connecting right now. Please try again in a moment.",
+        sender: "bot",
+        timestamp: new Date(),
+      }
+      setMessages((prev) => [...prev, errorMessage])
+      setPendingResponse(false)
+    } finally {
+      setIsTyping(false)
     }
-    setMessages((prev) => [...prev, botResponse])
-    setIsTyping(false)
   }
 
   const getBotResponse = async (userInput: string): Promise<string> => {
-    try{
+    try {
       const apiMessages = [
         ...messages.map((msg) => ({
-        role: msg.sender === "bot" ? "model" : "user",
-        parts: [{ text: msg.content }]
-      })),
-      {
-        role: "user",
-        parts: [{ text: userInput }],
-      }
-    ];
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: apiMessages }),
-    });
+          role: msg.sender === "bot" ? "model" : "user",
+          parts: [{ text: msg.content }],
+        })),
+        {
+          role: "user",
+          parts: [{ text: userInput }],
+        },
+      ]
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: apiMessages }),
+      })
 
-    const data = await res.json();
-    return data.reply;
-    }
-    catch(e){
-      console.error(e);
-      return "Erroe!";
+      const data = await res.json()
+      return data.reply || "I'm sorry, I couldn't process that request. Please try again."
+    } catch (e) {
+      console.error("Chat API Error:", e)
+      throw new Error("Failed to get response")
     }
   }
 
@@ -88,6 +132,11 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
       e.preventDefault()
       handleSendMessage()
     }
+  }
+
+  const handleClose = () => {
+    onClose()
+    // Don't clear pending response here - let it show notification
   }
 
   if (!isOpen) return null
@@ -106,8 +155,8 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
               <Bot className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h3 className="font-semibold text-slate-900 dark:text-white">Azraq AI Assistant</h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Online now</p>
+              <h3 className="font-semibold text-slate-900 dark:text-white">Aurora AI Assistant</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">{isTyping ? "Typing..." : "Online now"}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -122,7 +171,7 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
               )}
             </button>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
             >
               <X className="w-4 h-4 text-slate-500" />
@@ -133,7 +182,7 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
         {!isMinimized && (
           <>
             {/* Messages */}
-            <div className="flex-1 p-4 space-y-4 overflow-y-auto h-80">
+            <div className="flex-1 p-4 space-y-4 overflow-y-auto h-80 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent hover:scrollbar-thumb-slate-400 dark:hover:scrollbar-thumb-slate-500">
               {messages.map((message) => (
                 <div
                   key={message.id}
@@ -151,11 +200,8 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
                         : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white"
                     }`}
                   >
-                    <div>{message.sender === 'bot' ? (
-                      <Markdown>{message.content}</Markdown>
-                      ):(
-                        message.content
-                      )}
+                    <div className="text-sm">
+                      {message.sender === "bot" ? <Markdown>{message.content}</Markdown> : message.content}
                     </div>
                   </div>
                   {message.sender === "user" && (
@@ -165,7 +211,7 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
                   )}
                 </div>
               ))}
-
+              <div ref={messagesEndRef} />
               {isTyping && (
                 <div className="flex gap-3 justify-start">
                   <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full flex items-center justify-center flex-shrink-0">
@@ -198,10 +244,11 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
                   onKeyPress={handleKeyPress}
                   placeholder="Ask about our services..."
                   className="flex-1 px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors text-sm"
+                  disabled={isTyping}
                 />
                 <button
                   onClick={handleSendMessage}
-                  disabled={!inputValue.trim()}
+                  disabled={!inputValue.trim() || isTyping}
                   className="p-2 bg-gradient-to-r from-cyan-600 to-violet-600 text-white rounded-lg hover:from-cyan-700 hover:to-violet-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="w-4 h-4" />

@@ -7,9 +7,10 @@ import { ThemeProvider } from "../components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Azraq Web Agency - AI-Powered Web Development",
+  title: "Aurora Digital - AI-Powered Web Development",
   description:
     "Modern web applications built with AI. Full-stack development, AI integration, and MVP development for startups.",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -30,7 +31,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.webmanifest" />
       </head>
       <body className={inter.className}>
-        <ThemeProvider defaultTheme="system" storageKey="azraq-theme">
+        <ThemeProvider defaultTheme="system" storageKey="aurora-theme">
           {children}
         </ThemeProvider>
       </body>
