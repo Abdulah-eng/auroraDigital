@@ -24,7 +24,13 @@ import Link from "next/link"
 
 export default function LandingPage() {
   const [isChatOpen, setIsChatOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState({})
+  const [isVisible, setIsVisible] = useState({
+    hero: false,
+    services: false,
+    chatAgent: false,
+    contact: false,
+    about: false,
+  })
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [displayText, setDisplayText] = useState("")
   const [isTyping, setIsTyping] = useState(true)
@@ -274,13 +280,13 @@ export default function LandingPage() {
           {isMobileMenuOpen && (
             <div className="md:hidden py-4 border-t border-slate-200 dark:border-slate-800">
               <div className="flex flex-col space-y-4">
-                <a
+                <Link
                   href="#services"
                   className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Services
-                </a>
+                </Link>
                 <Link
                   href="/projects"
                   className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"

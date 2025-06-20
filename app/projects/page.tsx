@@ -124,7 +124,11 @@ const categories = ["All", "E-commerce", "Healthcare", "Education", "Fintech", "
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [isChatOpen, setIsChatOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState({})
+  const [isVisible, setIsVisible] = useState({
+    hero: false,
+    projects: false,
+    cta: false,
+  })
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
