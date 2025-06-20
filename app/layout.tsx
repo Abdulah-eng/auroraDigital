@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   title: "Azraq Web Agency - AI-Powered Web Development",
   description:
     "Modern web applications built with AI. Full-stack development, AI integration, and MVP development for startups.",
-  generator: "v0.dev",
 }
 
 export default function RootLayout({

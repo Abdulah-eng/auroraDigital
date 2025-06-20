@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { X, Send, Bot, User, Minimize2, Maximize2 } from "lucide-react"
+import { stringify } from "querystring"
 
 interface Message {
   id: string
@@ -44,43 +45,42 @@ export function ChatWindow({ isOpen, onClose }: ChatWindowProps) {
     setInputValue("")
     setIsTyping(true)
 
-    // Simulate AI response
-    setTimeout(() => {
-      const botResponse: Message = {
-        id: (Date.now() + 1).toString(),
-        content: getBotResponse(inputValue),
-        sender: "bot",
-        timestamp: new Date(),
-      }
-      setMessages((prev) => [...prev, botResponse])
-      setIsTyping(false)
-    }, 1500)
+    // AI response
+    const botResponse: Message = {
+      id: (Date.now() + 1).toString(),
+      content: await getBotResponse(inputValue),
+      sender: "bot",
+      timestamp: new Date(),
+    }
+    setMessages((prev) => [...prev, botResponse])
+    setIsTyping(false)
   }
 
-  const getBotResponse = (userInput: string): string => {
-    const input = userInput.toLowerCase()
+  const getBotResponse = async (userInput: string): Promise<string> => {
+    try{
+      const apiMessages = [
+        ...messages.map((msg) => ({
+        role: msg.sender === "bot" ? "model" : "user",
+        parts: [{ text: msg.content }]
+      })),
+      {
+        role: "user",
+        parts: [{ text: userInput }],
+      }
+    ];
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: apiMessages }),
+    });
 
-    if (input.includes("price") || input.includes("cost") || input.includes("quote")) {
-      return "Our pricing varies based on project complexity. For a basic website, we start at $2,500. For full-stack applications with AI integration, prices typically range from $5,000-$15,000. Would you like to schedule a consultation for a detailed quote?"
+    const data = await res.json();
+    return data.reply;
     }
-
-    if (input.includes("time") || input.includes("timeline") || input.includes("how long")) {
-      return "Project timelines depend on scope and complexity. A simple website takes 2-3 weeks, while complex AI-powered applications can take 6-12 weeks. We'll provide a detailed timeline after understanding your requirements."
+    catch(e){
+      console.error(e);
+      return "Erroe!";
     }
-
-    if (input.includes("ai") || input.includes("artificial intelligence")) {
-      return "We specialize in AI integration! We can add chatbots, recommendation systems, content generation, image processing, and custom AI models to your application. What specific AI features are you interested in?"
-    }
-
-    if (input.includes("tech") || input.includes("technology") || input.includes("stack")) {
-      return "We primarily work with Next.js, React, TypeScript, MongoDB, and various AI APIs. We also use Tailwind CSS for styling and deploy on Vercel. Is there a specific technology you'd like to use?"
-    }
-
-    if (input.includes("hello") || input.includes("hi") || input.includes("hey")) {
-      return "Hello! Great to meet you. I'm here to help answer any questions about Azraq's web development services. What kind of project are you working on?"
-    }
-
-    return "That's a great question! I'd love to connect you with our team for a detailed discussion. You can fill out our contact form or schedule a call. What specific aspect of your project would you like to discuss first?"
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {

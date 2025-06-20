@@ -345,15 +345,15 @@ export default function LandingPage() {
               <div className="space-y-3 text-slate-400">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  <span>hello@azraqwebagency.com</span>
+                  <span>shafiqueabdurrehman1@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+92 319-2165662</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  <span>San Francisco, CA</span>
+                  <span>NUST H-12, Islamabad, Pakistan</span>
                 </div>
               </div>
             </div>
