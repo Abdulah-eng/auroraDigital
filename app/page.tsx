@@ -1,7 +1,5 @@
 "use client"
 
-import type React from "react" // Import React type for clarity
-
 import {
   ArrowRight,
   Code,
@@ -22,28 +20,10 @@ import {
   CheckCircle,
   AlertCircle,
 } from "lucide-react"
-import { useState, useEffect, useRef, Suspense } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ThemeToggle } from "../components/theme-toggle"
 import { ChatWindow } from "../components/chat-window"
 import Link from "next/link"
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls, Environment, useGLTF } from "@react-three/drei"
-
-// RobotModel component for the 3D model
-function RobotModel() {
-  // Load the robot.glb model from the public directory
-  const { scene } = useGLTF("/robot.glb")
-  return (
-    <Suspense fallback={null}>
-      {/* Adjust scale and position as needed for your model */}
-      <primitive object={scene} scale={2} position={[0, -1, 0]} />
-      {/* Add ambient lighting and environment */}
-      <Environment preset="warehouse" />
-      {/* Allow user to orbit around the model */}
-      <OrbitControls enableZoom={false} enablePan={false} />
-    </Suspense>
-  )
-}
 
 export default function LandingPage() {
   const [isChatOpen, setIsChatOpen] = useState(false)
@@ -108,16 +88,16 @@ export default function LandingPage() {
   const formHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
-
+    
     const formData = new FormData(e.currentTarget)
     const name = formData.get("name")
     const email = formData.get("email")
     const project = formData.get("project")
-
+    
     const form = {
       name: name,
       email: email,
-      message: project,
+      message: project
     }
 
     try {
@@ -131,7 +111,7 @@ export default function LandingPage() {
         setNotification({
           show: true,
           success: true,
-          message: "Form submitted successfully! We'll contact you soon.",
+          message: "Form submitted successfully! We'll contact you soon."
         })
         // Clear form
         if (formRef.current) {
@@ -144,13 +124,13 @@ export default function LandingPage() {
       setNotification({
         show: true,
         success: false,
-        message: "Failed to submit form. Please try again.",
+        message: "Failed to submit form. Please try again."
       })
     } finally {
       setIsSubmitting(false)
       // Hide notification after 5 seconds
       setTimeout(() => {
-        setNotification((prev) => ({ ...prev, show: false }))
+        setNotification(prev => ({ ...prev, show: false }))
       }, 5000)
     }
   }
@@ -202,7 +182,7 @@ export default function LandingPage() {
                 href="/"
                 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2"
               >
-                {/* New Animated Logo SVG */}
+                {/* Enhanced Animated Logo SVG */}
                 <svg
                   width="28"
                   height="28"
@@ -211,29 +191,96 @@ export default function LandingPage() {
                   xmlns="http://www.w3.org/2000/svg"
                   className="relative flex-shrink-0 sm:w-8 sm:h-8"
                 >
-                  <rect x="0" y="0" width="32" height="32" fill="none" />
-                  {/* Animated path representing a digital flow */}
-                  <path
-                    d="M4 16 C 8 4, 24 4, 28 16 C 24 28, 8 28, 4 16 Z"
-                    stroke="url(#logoGradient)"
+                  {/* Outer rotating ring */}
+                  <circle
+                    cx="16"
+                    cy="16"
+                    r="14"
+                    stroke="url(#outerGradient)"
+                    strokeWidth="1.5"
+                    fill="none"
+                    strokeDasharray="20 5"
+                    opacity="0.6"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      type="rotate"
+                      values="0 16 16;360 16 16"
+                      dur="8s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+
+                  {/* Middle pulsing ring */}
+                  <circle
+                    cx="16"
+                    cy="16"
+                    r="10"
+                    stroke="url(#middleGradient)"
                     strokeWidth="2"
                     fill="none"
-                    strokeDasharray="100"
-                    strokeDashoffset="100"
+                    strokeDasharray="31.4"
+                    strokeDashoffset="0"
                   >
-                    <animate attributeName="stroke-dashoffset" values="100;0;100" dur="4s" repeatCount="indefinite" />
-                  </path>
-                  {/* Central pulsing circle */}
-                  <circle cx="16" cy="16" r="4" fill="url(#logoCenterGradient)">
-                    <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
+                    <animate attributeName="stroke-dashoffset" values="0;31.4;0" dur="3s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" />
                   </circle>
+
+                  {/* Inner morphing shape */}
+                  <path d="M16,6 L22,12 L16,18 L10,12 Z" fill="url(#innerGradient)" opacity="0.8">
+                    <animateTransform
+                      attributeName="transform"
+                      type="rotate"
+                      values="0 16 16;90 16 16;180 16 16;270 16 16;360 16 16"
+                      dur="6s"
+                      repeatCount="indefinite"
+                    />
+                    <animate attributeName="opacity" values="0.8;0.4;0.8" dur="2s" repeatCount="indefinite" />
+                  </path>
+
+                  {/* Central dot */}
+                  <circle cx="16" cy="16" r="2" fill="url(#centerGradient)">
+                    <animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite" />
+                  </circle>
+
+                  {/* Orbiting particles */}
+                  <circle cx="26" cy="16" r="1.5" fill="#06b6d4" opacity="0.7">
+                    <animateTransform
+                      attributeName="transform"
+                      type="rotate"
+                      values="0 16 16;360 16 16"
+                      dur="4s"
+                      repeatCount="indefinite"
+                    />
+                    <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite" />
+                  </circle>
+
+                  <circle cx="6" cy="16" r="1" fill="#8b5cf6" opacity="0.7">
+                    <animateTransform
+                      attributeName="transform"
+                      type="rotate"
+                      values="0 16 16;-360 16 16"
+                      dur="5s"
+                      repeatCount="indefinite"
+                    />
+                    <animate attributeName="opacity" values="0.7;0.2;0.7" dur="1.5s" repeatCount="indefinite" />
+                  </circle>
+
                   <defs>
-                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient id="outerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop offset="0%" stopColor="#06b6d4" />
-                      <stop offset="100%" stopColor="#8b5cf6" />
+                      <stop offset="50%" stopColor="#8b5cf6" />
+                      <stop offset="100%" stopColor="#06b6d4" />
                     </linearGradient>
-                    <radialGradient id="logoCenterGradient" cx="50%" cy="50%" r="50%">
+                    <linearGradient id="middleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#8b5cf6" />
+                      <stop offset="100%" stopColor="#06b6d4" />
+                    </linearGradient>
+                    <radialGradient id="innerGradient" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.4" />
+                    </radialGradient>
+                    <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#ffffff" />
                       <stop offset="100%" stopColor="#06b6d4" />
                     </radialGradient>
@@ -331,15 +378,13 @@ export default function LandingPage() {
       </nav>
       {/* Notification Toast */}
       {notification.show && (
-        <div
-          className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 max-w-xs w-full sm:max-w-sm ${
-            notification.success ? "bg-green-50 dark:bg-green-900" : "bg-red-50 dark:bg-red-900"
-          } rounded-lg shadow-lg border ${
-            notification.success ? "border-green-200 dark:border-green-800" : "border-red-200 dark:border-red-800"
-          } p-4 transform transition-all duration-300 ${
-            notification.show ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-        >
+        <div className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 max-w-xs w-full sm:max-w-sm ${
+          notification.success ? 'bg-green-50 dark:bg-green-900' : 'bg-red-50 dark:bg-red-900'
+        } rounded-lg shadow-lg border ${
+          notification.success ? 'border-green-200 dark:border-green-800' : 'border-red-200 dark:border-red-800'
+        } p-4 transform transition-all duration-300 ${
+          notification.show ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+        }`}>
           <div className="flex items-start">
             <div className="flex-shrink-0">
               {notification.success ? (
@@ -349,11 +394,9 @@ export default function LandingPage() {
               )}
             </div>
             <div className="ml-3">
-              <p
-                className={`text-sm font-medium ${
-                  notification.success ? "text-green-800 dark:text-green-100" : "text-red-800 dark:text-red-100"
-                }`}
-              >
+              <p className={`text-sm font-medium ${
+                notification.success ? 'text-green-800 dark:text-green-100' : 'text-red-800 dark:text-red-100'
+              }`}>
                 {notification.message}
               </p>
             </div>
@@ -361,11 +404,11 @@ export default function LandingPage() {
               <div className="-mx-1.5 -my-1.5">
                 <button
                   type="button"
-                  onClick={() => setNotification((prev) => ({ ...prev, show: false }))}
+                  onClick={() => setNotification(prev => ({ ...prev, show: false }))}
                   className={`inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                    notification.success
-                      ? "bg-green-50 text-green-500 hover:bg-green-100 focus:ring-green-600 focus:ring-offset-green-50 dark:bg-green-900 dark:hover:bg-green-800"
-                      : "bg-red-50 text-red-500 hover:bg-red-100 focus:ring-red-600 focus:ring-offset-red-50 dark:bg-red-900 dark:hover:bg-red-800"
+                    notification.success 
+                      ? 'bg-green-50 text-green-500 hover:bg-green-100 focus:ring-green-600 focus:ring-offset-green-50 dark:bg-green-900 dark:hover:bg-green-800'
+                      : 'bg-red-50 text-red-500 hover:bg-red-100 focus:ring-red-600 focus:ring-offset-red-50 dark:bg-red-900 dark:hover:bg-red-800'
                   }`}
                 >
                   <span className="sr-only">Dismiss</span>
@@ -505,15 +548,15 @@ export default function LandingPage() {
         </div>
 
         <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
-            className={`text-center lg:text-left transition-all duration-1000 lg:w-1/2 ${
+            className={`text-center transition-all duration-1000 ${
               isVisible.hero ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
             data-animate
             id="hero"
           >
-            <div className="flex justify-center lg:justify-start mb-6">
+            <div className="flex justify-center mb-6">
               <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2 animate-bounce-subtle">
                 <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -534,12 +577,12 @@ export default function LandingPage() {
             </h1>
 
             {/* Dynamic Description */}
-            <p className="text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-6 sm:mb-8 max-w-4xl mx-auto lg:mx-0 animate-fade-in-up animation-delay-200 leading-relaxed text-responsive px-4 sm:px-0">
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-6 sm:mb-8 max-w-4xl mx-auto animate-fade-in-up animation-delay-200 leading-relaxed text-responsive px-4 sm:px-0">
               {heroDescriptions[currentTextIndex]}
             </p>
 
             {/* Enhanced Stats */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-8 mb-6 sm:mb-8 animate-fade-in-up animation-delay-300 px-4 sm:px-0">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-6 sm:mb-8 animate-fade-in-up animation-delay-300 px-4 sm:px-0">
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-violet-600 bg-clip-text text-transparent">
                   10+
@@ -560,7 +603,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start animate-fade-in-up animation-delay-400 px-4 sm:px-0">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-up animation-delay-400 px-4 sm:px-0">
               <button
                 onClick={() => setIsChatOpen(true)}
                 className="group bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105 btn-responsive"
@@ -576,12 +619,6 @@ export default function LandingPage() {
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform flex-shrink-0" />
               </Link>
             </div>
-          </div>
-          {/* 3D Robot Model */}
-          <div className="w-full lg:w-1/2 h-[300px] sm:h-[400px] lg:h-[500px] flex items-center justify-center mt-8 lg:mt-0">
-            <Canvas className="w-full h-full">
-              <RobotModel />
-            </Canvas>
           </div>
         </div>
       </section>
@@ -777,7 +814,7 @@ export default function LandingPage() {
               onClick={() => setIsChatOpen(true)}
               className="group bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all flex items-center justify-center gap-2 mx-auto shadow-lg hover:shadow-xl transform hover:scale-105 btn-responsive"
             >
-              <Bot className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform flex-shrink-0" />
+              <Bot className="w-4 h-4 sm:w-5 sm:h-5 group-hover:bounce flex-shrink-0" />
               Talk to our AI Agent
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
             </button>
@@ -785,7 +822,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Lead Capture Section */}
+       {/* Lead Capture Section */}
       <section id="contact" className="py-12 sm:py-20 bg-white dark:bg-slate-950">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
@@ -815,7 +852,11 @@ export default function LandingPage() {
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            <form ref={formRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" onSubmit={formHandler}>
+            <form 
+              ref={formRef}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" 
+              onSubmit={formHandler}
+            >
               <div className="space-y-4 sm:space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
@@ -842,6 +883,7 @@ export default function LandingPage() {
                     required
                     className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all transform focus:scale-105 text-sm sm:text-base"
                     placeholder="john@example.com"
+                    disabled={isSubmitting}
                   />
                 </div>
               </div>
@@ -996,7 +1038,7 @@ export default function LandingPage() {
             {/* Smart notification dot - only shows when there's an unread message */}
             {hasUnreadMessage && (
               <div className="absolute -top-1 -right-1 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse">
-                <div className="absolute inset-0 w-2.5 h-2.5 sm:w-2.5 sm:h-2.5 bg-red-500 rounded-full animate-ping"></div>
+                <div className="absolute inset-0 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-ping"></div>
               </div>
             )}
           </button>
