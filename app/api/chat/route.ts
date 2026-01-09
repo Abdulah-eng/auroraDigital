@@ -1,15 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
-import { collection, addDoc, query, where, getDocs, limit, doc, setDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
-import crypto from "crypto";
 
-// Use the provided API key or fallback to environment variable
 const API_KEY = process.env.GEMINI_API_KEY || "AIzaSyBwKdSnOgVPVEzx5V4Rku1DajkQwAfwlR4";
-
 const genAI = new GoogleGenerativeAI(API_KEY);
 
-// System instruction for the AI assistant
 const SYSTEM_INSTRUCTION = `You are Aurora Digital's AI assistant. Aurora Digital is a tech company with a team of 6 expert developers who have delivered 50+ successful projects. 
 
 We specialize in:
@@ -18,14 +12,30 @@ We specialize in:
 - AI Agents & Automation (Chatbots, ML, NLP)
 - Full-Stack Solutions (MVP Development, End-to-End Solutions)
 
-Our services include:
-- Building scalable web applications
-- Developing native and cross-platform mobile apps
-- Creating AI-powered chatbots and automation systems
-- Providing MVP development for startups
-- Offering ongoing support and maintenance
+Be helpful, professional, and friendly. Answer questions about our services, pricing, portfolio, and how we can help clients.`;
 
-Be helpful, professional, and friendly. Answer questions about our services, pricing, portfolio, and how we can help clients. If a user provides their name, email, and project details, acknowledge it and let them know our team will contact them.`;
+// Simple fallback responses based on keywords
+function getFallbackResponse(userMessage: string): string {
+  const lowerMessage = userMessage.toLowerCase();
+  
+  if (lowerMessage.includes("service") || lowerMessage.includes("what do you do")) {
+    return "We offer comprehensive web development, mobile app development, AI agents & automation, and full-stack solutions. Our team of 6 expert developers has delivered 50+ successful projects. Would you like to know more about any specific service?";
+  }
+  
+  if (lowerMessage.includes("price") || lowerMessage.includes("cost") || lowerMessage.includes("how much")) {
+    return "Our pricing depends on your project requirements. We offer competitive rates for web development, mobile apps, and AI solutions. For a personalized quote, please share your project details or contact us directly at shafiqueabdurrehman@gmail.com";
+  }
+  
+  if (lowerMessage.includes("portfolio") || lowerMessage.includes("project") || lowerMessage.includes("work")) {
+    return "We've completed 50+ successful projects including e-commerce platforms, healthcare apps, education platforms, and business solutions. You can view our featured projects on our website or visit our projects page to see all our work!";
+  }
+  
+  if (lowerMessage.includes("contact") || lowerMessage.includes("email") || lowerMessage.includes("phone")) {
+    return "You can reach us at:\n📧 Email: shafiqueabdurrehman@gmail.com\n📞 Phone: +92 319-2165662\n📍 Location: NUST H-12, Islamabad, Pakistan\n\nWe'd love to discuss your project!";
+  }
+  
+  return "Thank you for your interest in Aurora Digital! We're a team of 6 expert developers specializing in web development, mobile apps, and AI solutions. For detailed information, please contact us at shafiqueabdurrehman@gmail.com or call +92 319-2165662. We're here to help bring your project to life!";
+}
 
 export async function POST(req: Request) {
   try {
@@ -39,109 +49,68 @@ export async function POST(req: Request) {
       );
     }
 
-    // Initialize the model - using gemini-pro which is widely available
-    const model = genAI.getGenerativeModel({ 
-      model: "gemini-pro",
-      systemInstruction: SYSTEM_INSTRUCTION,
-    });
+    // Get the last user message
+    const lastMessage = messages[messages.length - 1];
+    const userMessageText = lastMessage.parts?.[0]?.text || lastMessage.content || "";
 
-    // Filter and convert messages - ensure first message is from user
-    const validMessages = [];
-    for (let i = 0; i < messages.length; i++) {
-      const msg = messages[i];
-      const text = msg.parts?.[0]?.text || msg.content || "";
-      const role = msg.role === "model" ? "model" : "user";
-      
-      // Skip if empty text
-      if (!text.trim()) continue;
-      
-      // If this is the first message and it's from model, skip it
-      if (validMessages.length === 0 && role === "model") {
-        continue;
-      }
-      
-      validMessages.push({
-        role: role,
-        parts: [{ text }],
-      });
-    }
-
-    // Ensure we have at least one user message
-    if (validMessages.length === 0 || validMessages[validMessages.length - 1].role !== "user") {
+    if (!userMessageText.trim()) {
       return NextResponse.json(
-        { error: "No valid user message found" },
+        { error: "Message content is required" },
         { status: 400 }
       );
     }
 
-    // Get the last user message
-    const lastUserMessage = validMessages[validMessages.length - 1];
-    const userMessageText = lastUserMessage.parts[0].text;
-
-    // Build history (all messages except the last one)
-    const history = validMessages.slice(0, -1);
-
-    // Start chat with history (if any) or send message directly
-    let text: string;
-    if (history.length > 0) {
-      const chat = model.startChat({ history });
-      const result = await chat.sendMessage(userMessageText);
-      const response = await result.response;
-      text = response.text();
-    } else {
-      // No history, just send the message directly
-      const result = await model.generateContent(userMessageText);
-      const response = await result.response;
-      text = response.text();
-    }
-
-    // Try to parse as JSON to check if it's a lead submission
-    let parsed: any = null;
+    // Try to use Gemini AI, with fallback to simple responses
     try {
-      parsed = JSON.parse(text);
-    } catch {
-      // Not JSON, continue with normal response
-    }
-
-    // If all required fields exist, save to Firebase
-    if (parsed?.name && parsed?.email && parsed?.message) {
-      try {
-        // Create a deterministic ID based on the lead data
-        const leadData = `${parsed.name.toLowerCase().trim()}-${parsed.email.toLowerCase().trim()}-${parsed.message.toLowerCase().trim()}`;
-        const leadId = crypto.createHash('md5').update(leadData).digest('hex');
-        
-        // Use setDoc with the deterministic ID - this will not create duplicates
-        await setDoc(doc(db, "leads", leadId), {
-          name: parsed.name.trim(),
-          email: parsed.email.toLowerCase().trim(),
-          message: parsed.message.trim(),
-          createdAt: new Date(),
-        }, { merge: true });
-        
-        console.log("Lead processed successfully");
-
-        // Return success message
-        return NextResponse.json({
-          reply: "Thank you for your interest! Your information has been submitted successfully. Our team will contact you shortly.",
-        });
-        
-      } catch (err) {
-        console.error("Failed to save lead:", err);
-        // Continue with normal response even if saving fails
+      // Try different model names
+      const modelNames = [
+        "gemini-1.5-flash-latest",
+        "gemini-1.5-pro-latest", 
+        "gemini-1.5-flash",
+        "gemini-1.5-pro"
+      ];
+      
+      let model;
+      let lastError;
+      
+      for (const modelName of modelNames) {
+        try {
+          model = genAI.getGenerativeModel({ 
+            model: modelName,
+            systemInstruction: SYSTEM_INSTRUCTION,
+          });
+          
+          // Try to generate content
+          const result = await model.generateContent(userMessageText);
+          const response = await result.response;
+          const text = response.text();
+          
+          return NextResponse.json({ reply: text });
+        } catch (modelError: any) {
+          lastError = modelError;
+          console.log(`Model ${modelName} failed:`, modelError.message);
+          continue;
+        }
       }
+      
+      // If all models failed, use fallback
+      console.warn("All Gemini models failed, using fallback response. Last error:", lastError?.message);
+      const fallbackResponse = getFallbackResponse(userMessageText);
+      return NextResponse.json({ reply: fallbackResponse });
+      
+    } catch (aiError: any) {
+      console.error("AI service error:", aiError);
+      // Use intelligent fallback
+      const fallbackResponse = getFallbackResponse(userMessageText);
+      return NextResponse.json({ reply: fallbackResponse });
     }
-
-    // Return the AI response
-    return NextResponse.json({
-      reply: text,
-    });
     
   } catch (e: any) {
     console.error("Chat API Error:", e);
     return NextResponse.json(
       { 
         error: e.message || "Something went wrong",
-        reply: "I'm sorry, I'm having trouble processing your request right now. Please try again in a moment or contact us directly."
+        reply: "I'm sorry, I'm having trouble processing your request right now. Please contact us directly at shafiqueabdurrehman@gmail.com or call +92 319-2165662 for immediate assistance."
       },
       { status: 500 }
     );
