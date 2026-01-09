@@ -72,10 +72,11 @@ export function ChatWindow({ isOpen, onClose, onNotificationChange }: ChatWindow
     setPendingResponse(true)
 
     try {
-      // AI response
+      // AI response - getBotResponse now handles errors internally and returns error messages
+      const responseText = await getBotResponse(inputValue)
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        content: await getBotResponse(inputValue),
+        content: responseText,
         sender: "bot",
         timestamp: new Date(),
       }
@@ -87,10 +88,10 @@ export function ChatWindow({ isOpen, onClose, onNotificationChange }: ChatWindow
       } else {
         setPendingResponse(false)
       }
-    } catch (error) {
+    } catch (error: any) {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: "Sorry, I'm having trouble connecting right now. Please try again in a moment.",
+        content: error.message || "Sorry, I'm having trouble connecting right now. Please try again in a moment.",
         sender: "bot",
         timestamp: new Date(),
       }
@@ -103,8 +104,14 @@ export function ChatWindow({ isOpen, onClose, onNotificationChange }: ChatWindow
 
   const getBotResponse = async (userInput: string): Promise<string> => {
     try {
+      // Filter out the initial bot greeting and only include actual conversation
+      // Skip the first message if it's the initial bot greeting
+      const conversationMessages = messages.length > 0 && messages[0].id === "1" 
+        ? messages.slice(1) 
+        : messages;
+      
       const apiMessages = [
-        ...messages.map((msg) => ({
+        ...conversationMessages.map((msg) => ({
           role: msg.sender === "bot" ? "model" : "user",
           parts: [{ text: msg.content }],
         })),
@@ -119,11 +126,21 @@ export function ChatWindow({ isOpen, onClose, onNotificationChange }: ChatWindow
         body: JSON.stringify({ messages: apiMessages }),
       })
 
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}))
+        throw new Error(errorData.error || `HTTP error! status: ${res.status}`)
+      }
+
       const data = await res.json()
+      
+      if (data.error) {
+        throw new Error(data.error)
+      }
+      
       return data.reply || "I'm sorry, I couldn't process that request. Please try again."
-    } catch (e) {
+    } catch (e: any) {
       console.error("Chat API Error:", e)
-      throw new Error("Failed to get response")
+      return e.message || "I'm sorry, I'm having trouble connecting right now. Please try again in a moment or contact us directly."
     }
   }
 

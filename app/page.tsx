@@ -19,6 +19,12 @@ import {
   Loader2,
   CheckCircle,
   AlertCircle,
+  Smartphone,
+  Layers,
+  Users,
+  ShoppingCart,
+  BookOpen,
+  Heart,
 } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import { ThemeToggle } from "../components/theme-toggle"
@@ -49,19 +55,17 @@ export default function LandingPage() {
   const observerRef = useRef(null)
 
   const heroTexts = [
-    "Built by Humans, Powered by AI",
-    "Crafted with Code, Enhanced by Intelligence",
-    "Human Creativity Meets AI Innovation",
-    "Where Design Meets Intelligence",
-    "Engineered for Excellence, Powered by AI",
+    "We build scalable web, mobile, and AI-powered products",
+    "For startups and businesses ready to scale",
+    "With 50+ projects delivered and 6 expert developers",
+    "Transforming ideas into powerful digital solutions",
   ]
 
   const heroDescriptions = [
-    "We create stunning, high-performance web applications that drive results. From concept to launch, we're your digital transformation partner.",
-    "Transforming ideas into powerful digital experiences with cutting-edge AI integration and human-centered design.",
-    "Building the future of web development through intelligent automation and creative problem-solving.",
-    "Your vision, our expertise, AI's power - combined to create exceptional digital solutions that scale.",
-    "Delivering next-generation web applications that adapt, learn, and grow with your business needs.",
+    "We build scalable web, mobile, and AI-powered products for startups and businesses. 50+ successful projects. Expert team. Proven results.",
+    "From MVP to enterprise solutions, we deliver high-performance applications that drive growth and scale with your business.",
+    "Trusted by startups and businesses worldwide. Our team of 6 expert developers has delivered 50+ successful projects across web, mobile, and AI.",
+    "Full-stack development, mobile apps, and AI agents. We turn your vision into reality with cutting-edge technology and proven expertise.",
   ]
 
   useEffect(() => {
@@ -560,14 +564,13 @@ export default function LandingPage() {
               <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2 animate-bounce-subtle">
                 <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">
-                  AI-Powered Development
+                  50+ Projects Delivered • 6 Expert Developers
                 </span>
               </div>
             </div>
 
             {/* Dynamic Hero Title */}
-            <h1 className="hero-text text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6 animate-fade-in-up text-responsive">
-              Websites That Convert — <br className="hidden sm:block" />
+            <h1 className="hero-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6 animate-fade-in-up text-responsive leading-tight">
               <span className="bg-gradient-to-r from-cyan-600 to-violet-600 bg-clip-text text-transparent relative block sm:inline">
                 {displayText}
                 <span
@@ -585,21 +588,21 @@ export default function LandingPage() {
             <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-6 sm:mb-8 animate-fade-in-up animation-delay-300 px-4 sm:px-0">
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-violet-600 bg-clip-text text-transparent">
-                  10+
+                  50+
                 </div>
                 <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Projects Delivered</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-violet-600 to-pink-600 bg-clip-text text-transparent">
-                  99.99%
+                  6
                 </div>
-                <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Client Satisfaction</div>
+                <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Expert Developers</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-pink-600 to-cyan-600 bg-clip-text text-transparent">
-                  24/7
+                  100%
                 </div>
-                <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">AI Support</div>
+                <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Client Satisfaction</div>
               </div>
             </div>
 
@@ -676,8 +679,8 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 grid-responsive">
-            {/* Service 1 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 grid-responsive">
+            {/* Service 1 - Web Development */}
             <div
               className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-cyan-500/50 dark:hover:border-cyan-400/50 transition-all duration-500 transform hover:scale-105 ${
                 isVisible.services ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -688,21 +691,20 @@ export default function LandingPage() {
                 <Code className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-600 dark:text-cyan-400" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
-                Full-stack Web Development
+                Web Development
               </h3>
               <p className="text-slate-600 dark:text-slate-300 mb-4 sm:mb-6 text-sm sm:text-base">
-                Modern web applications built with Next.js, React, and MongoDB. Scalable, fast, and optimized for
-                performance and SEO.
+                Scalable web applications built with Next.js, React, and modern frameworks. Fast, SEO-optimized, and designed to grow with your business.
               </p>
               <ul className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 space-y-2">
-                <li>• Next.js & React Development</li>
-                <li>• MongoDB Database Design</li>
-                <li>• API Development & Integration</li>
+                <li>• Next.js & React</li>
+                <li>• Full-Stack Solutions</li>
+                <li>• API Development</li>
                 <li>• Performance Optimization</li>
               </ul>
             </div>
 
-            {/* Service 2 */}
+            {/* Service 2 - Mobile App Development */}
             <div
               className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-violet-500/50 dark:hover:border-violet-400/50 transition-all duration-500 transform hover:scale-105 ${
                 isVisible.services ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -710,24 +712,23 @@ export default function LandingPage() {
               style={{ transitionDelay: "200ms" }}
             >
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-violet-500/10 to-violet-600/20 dark:from-violet-400/10 dark:to-violet-500/20 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
-                <Bot className="w-6 h-6 sm:w-8 sm:h-8 text-violet-600 dark:text-violet-400" />
+                <Smartphone className="w-6 h-6 sm:w-8 sm:h-8 text-violet-600 dark:text-violet-400" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
-                AI-Powered Applications
+                Mobile App Development
               </h3>
               <p className="text-slate-600 dark:text-slate-300 mb-4 sm:mb-6 text-sm sm:text-base">
-                Integrate cutting-edge AI capabilities into your applications. From chatbots to intelligent automation
-                and data analysis.
+                Native and cross-platform mobile applications for iOS and Android. Beautiful UI/UX and seamless performance across all devices.
               </p>
               <ul className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 space-y-2">
-                <li>• AI Chatbot Development</li>
-                <li>• Machine Learning Integration</li>
-                <li>• Natural Language Processing</li>
-                <li>• Intelligent Automation</li>
+                <li>• iOS & Android Apps</li>
+                <li>• React Native</li>
+                <li>• Native Development</li>
+                <li>• App Store Optimization</li>
               </ul>
             </div>
 
-            {/* Service 3 */}
+            {/* Service 3 - AI Agents */}
             <div
               className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-pink-500/50 dark:hover:border-pink-400/50 transition-all duration-500 transform hover:scale-105 ${
                 isVisible.services ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -735,22 +736,287 @@ export default function LandingPage() {
               style={{ transitionDelay: "300ms" }}
             >
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-pink-500/10 to-pink-600/20 dark:from-pink-400/10 dark:to-pink-500/20 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
-                <Rocket className="w-6 h-6 sm:w-8 sm:h-8 text-pink-600 dark:text-pink-400" />
+                <Bot className="w-6 h-6 sm:w-8 sm:h-8 text-pink-600 dark:text-pink-400" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
-                MVP Development for Startups
+                AI Agents & Automation
               </h3>
               <p className="text-slate-600 dark:text-slate-300 mb-4 sm:mb-6 text-sm sm:text-base">
-                Rapid prototyping and MVP development to validate your ideas quickly. Get to market faster with our
-                agile development approach.
+                Intelligent AI agents, chatbots, and automation systems. Transform your business with cutting-edge AI capabilities.
               </p>
               <ul className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 space-y-2">
-                <li>• Rapid Prototyping</li>
-                <li>• Agile Development</li>
-                <li>• User Testing & Feedback</li>
-                <li>• Scalable Architecture</li>
+                <li>• AI Chatbots</li>
+                <li>• Intelligent Automation</li>
+                <li>• Machine Learning</li>
+                <li>• NLP Integration</li>
               </ul>
             </div>
+
+            {/* Service 4 - Full-Stack Solutions */}
+            <div
+              className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-amber-500/50 dark:hover:border-amber-400/50 transition-all duration-500 transform hover:scale-105 ${
+                isVisible.services ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "400ms" }}
+            >
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-amber-500/10 to-amber-600/20 dark:from-amber-400/10 dark:to-amber-500/20 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                <Layers className="w-6 h-6 sm:w-8 sm:h-8 text-amber-600 dark:text-amber-400" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
+                Full-Stack Solutions
+              </h3>
+              <p className="text-slate-600 dark:text-slate-300 mb-4 sm:mb-6 text-sm sm:text-base">
+                End-to-end development from concept to deployment. MVP development, scaling, and ongoing support for startups and businesses.
+              </p>
+              <ul className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 space-y-2">
+                <li>• MVP Development</li>
+                <li>• End-to-End Solutions</li>
+                <li>• Scalable Architecture</li>
+                <li>• Ongoing Support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Credibility Section */}
+      <section className="py-12 sm:py-20 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
+              isVisible.services ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            data-animate
+            id="credibility"
+          >
+            <div className="flex justify-center mb-4">
+              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2">
+                <Users className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Why Trust Us</span>
+              </div>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              Proven Track Record
+            </h2>
+            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-responsive">
+              A team of expert developers with a proven history of delivering successful projects
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 text-center">
+              <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-cyan-600 to-violet-600 bg-clip-text text-transparent mb-3">
+                50+
+              </div>
+              <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white mb-2">Projects Delivered</h3>
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                Successfully completed projects across web, mobile, and AI applications
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 text-center">
+              <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-violet-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                6
+              </div>
+              <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white mb-2">Expert Developers</h3>
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                Specialized in web development, mobile apps, and AI agent development
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 text-center">
+              <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-pink-600 to-cyan-600 bg-clip-text text-transparent mb-3">
+                100%
+              </div>
+              <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white mb-2">Client Satisfaction</h3>
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                Committed to delivering exceptional results and exceeding expectations
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4">Our Expertise</h3>
+              <ul className="space-y-3 text-slate-600 dark:text-slate-300">
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>Full-stack web development with Next.js, React, and modern frameworks</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>Native and cross-platform mobile app development</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>AI agent development and intelligent automation systems</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>MVP development and rapid prototyping for startups</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4">What We Deliver</h3>
+              <ul className="space-y-3 text-slate-600 dark:text-slate-300">
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-violet-600 dark:text-violet-400 flex-shrink-0 mt-0.5" />
+                  <span>Scalable, high-performance applications that grow with your business</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-violet-600 dark:text-violet-400 flex-shrink-0 mt-0.5" />
+                  <span>Modern, responsive designs optimized for all devices</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-violet-600 dark:text-violet-400 flex-shrink-0 mt-0.5" />
+                  <span>Clean, maintainable code following best practices</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-violet-600 dark:text-violet-400 flex-shrink-0 mt-0.5" />
+                  <span>Ongoing support and maintenance for long-term success</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Projects Section */}
+      <section className="py-12 sm:py-20 bg-white dark:bg-slate-950 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
+              isVisible.services ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            data-animate
+            id="featured-projects"
+          >
+            <div className="flex justify-center mb-4">
+              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2">
+                <Rocket className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Our Work</span>
+              </div>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              Featured Projects
+            </h2>
+            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-responsive">
+              A selection of our recent work showcasing our expertise across different industries
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {/* Featured Project 1 */}
+            <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 transform">
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src="https://placehold.co/600x400/10b981/ffffff?text=Bedo+Living"
+                  alt="Bedo Living"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Bedo Living</h3>
+                <p className="text-slate-600 dark:text-slate-300 text-sm mb-4">
+                  Premium e-commerce platform for mattresses and bedding with full shopping cart and checkout system.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded text-xs">Next.js</span>
+                  <span className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded text-xs">E-commerce</span>
+                </div>
+                <a
+                  href="http://bedoraliving.co.uk/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 text-sm font-medium flex items-center gap-2"
+                >
+                  View Project <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            {/* Featured Project 2 */}
+            <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 transform">
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src="https://placehold.co/600x400/3b82f6/ffffff?text=LearnHub"
+                  alt="LearnHub"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://via.placeholder.com/600x400/3b82f6/ffffff?text=LearnHub";
+                  }}
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">LearnHub</h3>
+                <p className="text-slate-600 dark:text-slate-300 text-sm mb-4">
+                  Interactive learning platform with course management, progress tracking, and educational resources.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded text-xs">Next.js</span>
+                  <span className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded text-xs">Education</span>
+                </div>
+                <a
+                  href="https://learnhub-livid.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 text-sm font-medium flex items-center gap-2"
+                >
+                  View Project <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            {/* Featured Project 3 */}
+            <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 transform">
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src="https://placehold.co/600x400/ec4899/ffffff?text=Breast+MRI"
+                  alt="Breast MRI"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://via.placeholder.com/600x400/ec4899/ffffff?text=Breast+MRI";
+                  }}
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Breast MRI</h3>
+                <p className="text-slate-600 dark:text-slate-300 text-sm mb-4">
+                  Healthcare platform for medical imaging services with patient portal and appointment scheduling.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded text-xs">Next.js</span>
+                  <span className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded text-xs">Healthcare</span>
+                </div>
+                <a
+                  href="https://breastmri.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 text-sm font-medium flex items-center gap-2"
+                >
+                  View Project <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-8 sm:mt-12">
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              View All Projects
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            </Link>
           </div>
         </div>
       </section>
@@ -839,10 +1105,10 @@ export default function LandingPage() {
               </div>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-              Ready to Start Your Project?
+              Ready to Build Your Next Project?
             </h2>
-            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 text-responsive">
-              Tell us about your vision and we'll bring it to life
+            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 text-responsive max-w-2xl mx-auto">
+              Join 50+ successful projects. Get a free consultation and discover how we can transform your idea into a scalable digital solution.
             </p>
           </div>
 
@@ -926,7 +1192,7 @@ export default function LandingPage() {
 
       {/* About Us Section */}
       <section id="about" className="py-12 sm:py-20 bg-slate-50 dark:bg-slate-900">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className={`transition-all duration-1000 ${
               isVisible.about ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -934,14 +1200,30 @@ export default function LandingPage() {
             data-animate
             id="about"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 sm:mb-8">
-              Who We Are
-            </h2>
-            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed text-responsive">
-              We're engineers who love design, automation, and delivering powerful web solutions. Our team combines
-              technical expertise with creative vision to build applications that not only look great but perform
-              exceptionally. We believe in the power of AI to enhance human creativity, not replace it.
-            </p>
+            <div className="text-center mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 sm:mb-8">
+                Who We Are
+              </h2>
+              <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed text-responsive max-w-3xl mx-auto">
+                A team of 6 expert developers specializing in web development, mobile apps, and AI agents. With 50+ successful projects delivered, we combine technical expertise with creative vision to build applications that drive real business results.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl shadow-lg">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4">Our Mission</h3>
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                  We transform ideas into powerful digital solutions. Whether you're a startup looking to launch your MVP or an established business needing to scale, we deliver high-performance applications that drive growth and exceed expectations.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl shadow-lg">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4">Our Approach</h3>
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                  We believe in the power of AI to enhance human creativity, not replace it. Our team combines cutting-edge technology with proven development practices to deliver scalable, maintainable solutions that stand the test of time.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
