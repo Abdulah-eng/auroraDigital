@@ -39,9 +39,9 @@ export async function POST(req: Request) {
       );
     }
 
-    // Initialize the model
+    // Initialize the model - using gemini-pro which is widely available
     const model = genAI.getGenerativeModel({ 
-      model: "gemini-1.5-flash",
+      model: "gemini-pro",
       systemInstruction: SYSTEM_INSTRUCTION,
     });
 
