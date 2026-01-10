@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "../components/theme-provider"
+import { ChatWindow } from "../components/chat-window"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider defaultTheme="system" storageKey="aurora-theme">
           {children}
+          <ChatWindow />
         </ThemeProvider>
       </body>
     </html>

@@ -1,38 +1,27 @@
 "use client"
 
-import type React from "react"
-import Markdown from "react-markdown"
 import { useState, useRef, useEffect } from "react"
-import { X, Send, Bot, User, Minimize2, Maximize2 } from "lucide-react"
+import { Bot, X, Send, Loader2, Minimize2, Maximize2 } from "lucide-react"
+import { Button } from "./ui/button"
 
 interface Message {
-  id: string
+  role: "user" | "assistant"
   content: string
-  sender: "user" | "bot"
-  timestamp: Date
 }
 
-interface ChatWindowProps {
-  isOpen: boolean
-  onClose: () => void
-  onNotificationChange?: (hasUnread: boolean) => void
-}
-
-export function ChatWindow({ isOpen, onClose, onNotificationChange }: ChatWindowProps) {
+export function ChatWindow() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isMinimized, setIsMinimized] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
     {
-      id: "1",
-      content: "Hi! I'm Aurora Digital's AI assistant. How can I help you with your web development project today?",
-      sender: "bot",
-      timestamp: new Date(),
+      role: "assistant",
+      content: "Hello! I'm the AI assistant for Aurora Digital. I'm here to help answer questions about our services, projects, and how we can help bring your digital vision to life. How can I assist you today?",
     },
   ])
-  const [inputValue, setInputValue] = useState("")
-  const [isMinimized, setIsMinimized] = useState(false)
-  const [isTyping, setIsTyping] = useState(false)
-  const [pendingResponse, setPendingResponse] = useState(false)
-
+  const [input, setInput] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -42,239 +31,212 @@ export function ChatWindow({ isOpen, onClose, onNotificationChange }: ChatWindow
     scrollToBottom()
   }, [messages])
 
-  // Handle notification logic
   useEffect(() => {
-    if (onNotificationChange) {
-      onNotificationChange(pendingResponse && !isOpen)
+    if (isOpen && !isMinimized) {
+      inputRef.current?.focus()
     }
-  }, [pendingResponse, isOpen, onNotificationChange])
+  }, [isOpen, isMinimized])
 
-  // Clear notification when chat is opened
-  useEffect(() => {
-    if (isOpen && pendingResponse) {
-      setPendingResponse(false)
-    }
-  }, [isOpen, pendingResponse])
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return
 
-  const handleSendMessage = async () => {
-    if (!inputValue.trim()) return
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      content: inputValue,
-      sender: "user",
-      timestamp: new Date(),
-    }
-
-    setMessages((prev) => [...prev, userMessage])
-    setInputValue("")
-    setIsTyping(true)
-    setPendingResponse(true)
+    const userMessage = input.trim()
+    setInput("")
+    setMessages((prev) => [...prev, { role: "user", content: userMessage }])
+    setIsLoading(true)
 
     try {
-      // AI response - getBotResponse now handles errors internally and returns error messages
-      const responseText = await getBotResponse(inputValue)
-      const botResponse: Message = {
-        id: (Date.now() + 1).toString(),
-        content: responseText,
-        sender: "bot",
-        timestamp: new Date(),
-      }
-      setMessages((prev) => [...prev, botResponse])
+      // Build conversation history for the API
+      const history = messages.map((msg) => ({
+        role: msg.role,
+        content: msg.content,
+      }))
 
-      // If chat is closed when response arrives, show notification
-      if (!isOpen) {
-        setPendingResponse(true)
-      } else {
-        setPendingResponse(false)
-      }
-    } catch (error: any) {
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        content: error.message || "Sorry, I'm having trouble connecting right now. Please try again in a moment.",
-        sender: "bot",
-        timestamp: new Date(),
-      }
-      setMessages((prev) => [...prev, errorMessage])
-      setPendingResponse(false)
-    } finally {
-      setIsTyping(false)
-    }
-  }
-
-  const getBotResponse = async (userInput: string): Promise<string> => {
-    try {
-      // Filter out the initial bot greeting and only include actual conversation
-      // Skip the first message if it's the initial bot greeting
-      const conversationMessages = messages.length > 0 && messages[0].id === "1" 
-        ? messages.slice(1) 
-        : messages;
-      
-      const apiMessages = [
-        ...conversationMessages.map((msg) => ({
-          role: msg.sender === "bot" ? "model" : "user",
-          parts: [{ text: msg.content }],
-        })),
-        {
-          role: "user",
-          parts: [{ text: userInput }],
-        },
-      ]
-      const res = await fetch("/api/chat", {
+      const response = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: apiMessages }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          history: history,
+        }),
       })
 
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}))
-        throw new Error(errorData.error || `HTTP error! status: ${res.status}`)
+      const data = await response.json()
+
+      if (!response.ok) {
+        // If there's a fallback message, use it
+        if (data.fallback) {
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: data.fallback },
+          ])
+          return
+        }
+        throw new Error(data.error || "Failed to get response")
       }
 
-      const data = await res.json()
-      
-      if (data.error) {
-        throw new Error(data.error)
+      if (data.response) {
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: data.response },
+        ])
+      } else if (data.fallback) {
+        // Use fallback message if available
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: data.fallback },
+        ])
+      } else {
+        throw new Error(data.error || "Failed to get response")
       }
-      
-      return data.reply || "I'm sorry, I couldn't process that request. Please try again."
-    } catch (e: any) {
-      console.error("Chat API Error:", e)
-      return e.message || "I'm sorry, I'm having trouble connecting right now. Please try again in a moment or contact us directly."
+    } catch (error: any) {
+      console.error("Error sending message:", error)
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "I apologize, but I'm having trouble processing your request right now. Please try again later or contact us directly at shafiqueabdurrehman@gmail.com",
+        },
+      ])
+    } finally {
+      setIsLoading(false)
     }
   }
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
-      handleSendMessage()
+      handleSend()
     }
   }
 
-  const handleClose = () => {
-    onClose()
-    // Don't clear pending response here - let it show notification
+  if (!isOpen) {
+    return (
+      <button
+        onClick={() => setIsOpen(true)}
+        className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-cyan-600 to-violet-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center w-16 h-16"
+        aria-label="Open chat"
+      >
+        <Bot className="w-6 h-6" />
+      </button>
+    )
   }
 
-  if (!isOpen) return null
-
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      <div
-        className={`bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 transition-all duration-300 ${
-          isMinimized ? "w-80 h-16" : "w-96 h-[500px]"
-        }`}
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full flex items-center justify-center">
-              <Bot className="w-4 h-4 text-white" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-slate-900 dark:text-white">Aurora AI Assistant</h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">{isTyping ? "Typing..." : "Online now"}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIsMinimized(!isMinimized)}
-              className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-            >
-              {isMinimized ? (
-                <Maximize2 className="w-4 h-4 text-slate-500" />
-              ) : (
-                <Minimize2 className="w-4 h-4 text-slate-500" />
-              )}
-            </button>
-            <button
-              onClick={handleClose}
-              className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-            >
-              <X className="w-4 h-4 text-slate-500" />
-            </button>
-          </div>
+    <div
+      className={`fixed bottom-6 right-6 z-50 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col transition-all duration-300 ${
+        isMinimized
+          ? "w-80 h-16"
+          : "w-[90vw] sm:w-96 h-[600px] max-h-[80vh]"
+      }`}
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800 bg-gradient-to-r from-cyan-600 to-violet-600 rounded-t-2xl">
+        <div className="flex items-center gap-2 text-white">
+          <Bot className="w-5 h-5" />
+          <span className="font-semibold">Aurora Digital AI</span>
         </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setIsMinimized(!isMinimized)}
+            className="text-white hover:bg-white/20 p-1 rounded transition-colors"
+            aria-label={isMinimized ? "Maximize" : "Minimize"}
+          >
+            {isMinimized ? (
+              <Maximize2 className="w-4 h-4" />
+            ) : (
+              <Minimize2 className="w-4 h-4" />
+            )}
+          </button>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-white hover:bg-white/20 p-1 rounded transition-colors"
+            aria-label="Close chat"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
 
-        {!isMinimized && (
-          <>
-            {/* Messages */}
-            <div className="flex-1 p-4 space-y-4 overflow-y-auto h-80 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent hover:scrollbar-thumb-slate-400 dark:hover:scrollbar-thumb-slate-500">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex gap-3 ${message.sender === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  {message.sender === "bot" && (
-                    <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Bot className="w-4 h-4 text-white" />
-                    </div>
-                  )}
-                  <div
-                    className={`max-w-xs px-4 py-2 rounded-2xl ${
-                      message.sender === "user"
-                        ? "bg-gradient-to-r from-cyan-600 to-violet-600 text-white"
-                        : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white"
-                    }`}
-                  >
-                    <div className="text-sm">
-                      {message.sender === "bot" ? <Markdown>{message.content}</Markdown> : message.content}
-                    </div>
-                  </div>
-                  {message.sender === "user" && (
-                    <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-full flex items-center justify-center flex-shrink-0">
-                      <User className="w-4 h-4 text-slate-600 dark:text-slate-300" />
-                    </div>
-                  )}
-                </div>
-              ))}
-              <div ref={messagesEndRef} />
-              {isTyping && (
-                <div className="flex gap-3 justify-start">
-                  <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full flex items-center justify-center flex-shrink-0">
+      {!isMinimized && (
+        <>
+          {/* Messages */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`flex gap-3 ${
+                  message.role === "user" ? "justify-end" : "justify-start"
+                }`}
+              >
+                {message.role === "assistant" && (
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-600 to-violet-600 flex items-center justify-center flex-shrink-0">
                     <Bot className="w-4 h-4 text-white" />
                   </div>
-                  <div className="bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-2xl">
-                    <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></div>
-                      <div
-                        className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.1s" }}
-                      ></div>
-                      <div
-                        className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Input */}
-            <div className="p-4 border-t border-slate-200 dark:border-slate-800">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Ask about our services..."
-                  className="flex-1 px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors text-sm"
-                  disabled={isTyping}
-                />
-                <button
-                  onClick={handleSendMessage}
-                  disabled={!inputValue.trim() || isTyping}
-                  className="p-2 bg-gradient-to-r from-cyan-600 to-violet-600 text-white rounded-lg hover:from-cyan-700 hover:to-violet-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                )}
+                <div
+                  className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                    message.role === "user"
+                      ? "bg-gradient-to-r from-cyan-600 to-violet-600 text-white"
+                      : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100"
+                  }`}
                 >
-                  <Send className="w-4 h-4" />
-                </button>
+                  <p className="text-sm whitespace-pre-wrap break-words">
+                    {message.content}
+                  </p>
+                </div>
+                {message.role === "user" && (
+                  <div className="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center flex-shrink-0">
+                    <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">
+                      You
+                    </span>
+                  </div>
+                )}
               </div>
+            ))}
+            {isLoading && (
+              <div className="flex gap-3 justify-start">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-600 to-violet-600 flex items-center justify-center flex-shrink-0">
+                  <Bot className="w-4 h-4 text-white" />
+                </div>
+                <div className="bg-slate-100 dark:bg-slate-800 rounded-lg px-4 py-2">
+                  <Loader2 className="w-4 h-4 animate-spin text-cyan-600" />
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input */}
+          <div className="p-4 border-t border-slate-200 dark:border-slate-800">
+            <div className="flex gap-2">
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type your message..."
+                className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm"
+                disabled={isLoading}
+              />
+              <Button
+                onClick={handleSend}
+                disabled={!input.trim() || isLoading}
+                className="bg-gradient-to-r from-cyan-600 to-violet-600 hover:from-cyan-700 hover:to-violet-700 text-white px-4 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Send className="w-4 h-4" />
+                )}
+              </Button>
             </div>
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }

@@ -25,25 +25,24 @@ import {
   ShoppingCart,
   BookOpen,
   Heart,
+  Star,
+  Quote,
 } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import { ThemeToggle } from "../components/theme-toggle"
-import { ChatWindow } from "../components/chat-window"
+
 import Link from "next/link"
 
 export default function LandingPage() {
-  const [isChatOpen, setIsChatOpen] = useState(false)
   const [isVisible, setIsVisible] = useState({
     hero: false,
     services: false,
-    chatAgent: false,
     contact: false,
     about: false,
   })
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [displayText, setDisplayText] = useState("")
   const [isTyping, setIsTyping] = useState(true)
-  const [hasUnreadMessage, setHasUnreadMessage] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [notification, setNotification] = useState<{
@@ -171,9 +170,6 @@ export default function LandingPage() {
     return () => clearInterval(typeInterval)
   }, [currentTextIndex])
 
-  const handleChatNotification = (hasUnread: boolean) => {
-    setHasUnreadMessage(hasUnread)
-  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors container-responsive">
@@ -310,6 +306,18 @@ export default function LandingPage() {
               >
                 Projects
               </Link>
+              <Link
+                href="/team"
+                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors text-sm lg:text-base"
+              >
+                Team
+              </Link>
+              <Link
+                href="/testimonials"
+                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors text-sm lg:text-base"
+              >
+                Reviews
+              </Link>
               <a
                 href="#about"
                 className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors text-sm lg:text-base"
@@ -323,9 +331,6 @@ export default function LandingPage() {
                 Contact
               </a>
               <ThemeToggle />
-              <button className="bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-4 lg:px-6 py-2 rounded-lg hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 text-sm lg:text-base btn-responsive">
-                Get Started
-              </button>
             </div>
 
             {/* Mobile Navigation */}
@@ -358,6 +363,20 @@ export default function LandingPage() {
                 >
                   Projects
                 </Link>
+                <Link
+                  href="/team"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Team
+                </Link>
+                <Link
+                  href="/testimonials"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Reviews
+                </Link>
                 <a
                   href="#about"
                   className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
@@ -372,9 +391,6 @@ export default function LandingPage() {
                 >
                   Contact
                 </a>
-                <button className="bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 py-2 rounded-lg hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg text-left">
-                  Get Started
-                </button>
               </div>
             </div>
           )}
@@ -607,13 +623,6 @@ export default function LandingPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-up animation-delay-400 px-4 sm:px-0">
-              <button
-                onClick={() => setIsChatOpen(true)}
-                className="group bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105 btn-responsive"
-              >
-                Talk to our AI Agent
-                <Bot className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform flex-shrink-0" />
-              </button>
               <Link
                 href="/projects"
                 className="border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center transform hover:scale-105 btn-responsive"
@@ -912,7 +921,7 @@ export default function LandingPage() {
             <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 transform">
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src="https://placehold.co/600x400/10b981/ffffff?text=Bedo+Living"
+                  src="/images/bedoraliving.png"
                   alt="Bedo Living"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -942,13 +951,9 @@ export default function LandingPage() {
             <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 transform">
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src="https://placehold.co/600x400/3b82f6/ffffff?text=LearnHub"
+                  src="/images/learnhub.png"
                   alt="LearnHub"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = "https://via.placeholder.com/600x400/3b82f6/ffffff?text=LearnHub";
-                  }}
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -977,13 +982,9 @@ export default function LandingPage() {
             <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 transform">
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src="https://placehold.co/600x400/ec4899/ffffff?text=Breast+MRI"
+                  src="/images/breast.png"
                   alt="Breast MRI"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = "https://via.placeholder.com/600x400/ec4899/ffffff?text=Breast+MRI";
-                  }}
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -998,7 +999,7 @@ export default function LandingPage() {
                   <span className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded text-xs">Healthcare</span>
                 </div>
                 <a
-                  href="https://breastmri.vercel.app/"
+                  href="https://breastmri-ymdm.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 text-sm font-medium flex items-center gap-2"
@@ -1021,69 +1022,137 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* AI Chat Agent Section */}
-      <section className="py-12 sm:py-20 bg-gradient-to-r from-cyan-50 to-violet-50 dark:from-slate-900 dark:to-slate-800 relative overflow-hidden">
-        {/* Animated Circuit Pattern SVG */}
-        <div className="absolute inset-0 opacity-10 dark:opacity-5">
-          <svg width="100%" height="100%" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g stroke="currentColor" strokeWidth="1" fill="none">
-              <circle cx="100" cy="100" r="20">
-                <animate attributeName="r" values="20;25;20" dur="2s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="300" cy="100" r="15">
-                <animate attributeName="r" values="15;20;15" dur="2s" repeatCount="indefinite" begin="0.5s" />
-              </circle>
-              <circle cx="200" cy="200" r="25">
-                <animate attributeName="r" values="25;30;25" dur="2s" repeatCount="indefinite" begin="1s" />
-              </circle>
-              <circle cx="100" cy="300" r="18">
-                <animate attributeName="r" values="18;23;18" dur="2s" repeatCount="indefinite" begin="1.5s" />
-              </circle>
-              <circle cx="300" cy="300" r="22">
-                <animate attributeName="r" values="22;27;22" dur="2s" repeatCount="indefinite" begin="0.3s" />
-              </circle>
-              <line x1="120" y1="100" x2="180" y2="200">
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" />
-              </line>
-              <line x1="220" y1="200" x2="280" y2="100">
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" begin="1s" />
-              </line>
-              <line x1="200" y1="220" x2="120" y2="300">
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" begin="2s" />
-              </line>
-              <line x1="220" y1="220" x2="280" y2="300">
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" begin="0.5s" />
-              </line>
-            </g>
-          </svg>
-        </div>
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Featured Testimonials Section */}
+      <section className="py-12 sm:py-20 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div
-            className={`bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 transition-all duration-1000 transform ${
-              isVisible.chatAgent ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"
+            className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
+              isVisible.services ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
             data-animate
-            id="chatAgent"
+            id="featured-testimonials"
           >
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg animate-pulse-subtle">
-              <Bot className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+            <div className="flex justify-center mb-4">
+              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2">
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Client Reviews</span>
+              </div>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
-              Get Instant Answers from Our AI Agent
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              What Our Clients Say
             </h2>
-            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-6 sm:mb-8 text-responsive">
-              Have questions about your project? Our AI agent is here to help 24/7. Get instant quotes, technical
-              advice, and project guidance.
+            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-responsive">
+              Don't just take our word for it. Here's what our clients have to say about working with us.
             </p>
-            <button
-              onClick={() => setIsChatOpen(true)}
-              className="group bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all flex items-center justify-center gap-2 mx-auto shadow-lg hover:shadow-xl transform hover:scale-105 btn-responsive"
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {/* Featured Testimonial 1 */}
+            <div className="group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-cyan-300 dark:hover:border-cyan-700 transform hover:-translate-y-2 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-600 via-violet-600 to-pink-600"></div>
+              <div className="absolute top-6 right-6 opacity-10 dark:opacity-5">
+                <Quote className="w-16 h-16 text-cyan-600" />
+              </div>
+              <div className="relative">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-slate-700 dark:text-slate-200 leading-relaxed mb-6 text-sm sm:text-base">
+                  "Amazing experience working with this developer! He communicated clearly, stayed proactive throughout the entire project, and delivered results beyond my expectations. He didn't just complete tasks; he improved the design, functionality, and overall quality of my website."
+                </p>
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-600 to-violet-600 flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
+                    P
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <h3 className="font-semibold text-slate-900 dark:text-white text-sm sm:text-base">pcs_rl</h3>
+                      <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
+                        ⭐ Repeat
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">United States</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Featured Testimonial 2 */}
+            <div className="group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-cyan-300 dark:hover:border-cyan-700 transform hover:-translate-y-2 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-600 via-violet-600 to-pink-600"></div>
+              <div className="absolute top-6 right-6 opacity-10 dark:opacity-5">
+                <Quote className="w-16 h-16 text-cyan-600" />
+              </div>
+              <div className="relative">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-slate-700 dark:text-slate-200 leading-relaxed mb-6 text-sm sm:text-base">
+                  "This developer is legit one of the best I've worked with on Fiverr. He delivered a fully functional, clean, and professional web app ahead of schedule — with features exactly as I described (and even improved some with his own suggestions). Communication was top-notch, he understood everything quickly, and delivered beyond expectations."
+                </p>
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-600 to-violet-600 flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
+                    J
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <h3 className="font-semibold text-slate-900 dark:text-white text-sm sm:text-base">jeremypop</h3>
+                      <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
+                        ⭐ Repeat
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Australia</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Featured Testimonial 3 */}
+            <div className="group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-cyan-300 dark:hover:border-cyan-700 transform hover:-translate-y-2 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-600 via-violet-600 to-pink-600"></div>
+              <div className="absolute top-6 right-6 opacity-10 dark:opacity-5">
+                <Quote className="w-16 h-16 text-cyan-600" />
+              </div>
+              <div className="relative">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-slate-700 dark:text-slate-200 leading-relaxed mb-6 text-sm sm:text-base">
+                  "I had the pleasure of working with Abdullah and can confidently say he delivered above and beyond expectations. His professionalism, attention to detail, and dedication to quality work made a huge difference in the success of our project. Abdullah communicates clearly, meets deadlines, and shows genuine care for the project's success."
+                </p>
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-600 to-violet-600 flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
+                    D
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <h3 className="font-semibold text-slate-900 dark:text-white text-sm sm:text-base">darreire2020</h3>
+                      <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
+                        ⭐ Repeat
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Ireland</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-8 sm:mt-12">
+            <Link
+              href="/testimonials"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
             >
-              <Bot className="w-4 h-4 sm:w-5 sm:h-5 group-hover:bounce flex-shrink-0" />
-              Talk to our AI Agent
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
-            </button>
+              View All Reviews
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            </Link>
           </div>
         </div>
       </section>
@@ -1240,39 +1309,44 @@ export default function LandingPage() {
                 Building the future of web development with AI-powered solutions and human creativity.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
+                <a href="https://github.com/Abdulah-eng/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
                   <Github className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
                 <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
                   <Twitter className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
-                <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
+                <a href="https://www.linkedin.com/in/muhammad-abdullah-575819355" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
                   <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
               </div>
             </div>
 
             <div>
-              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Services</h3>
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Quick Links</h3>
               <ul className="space-y-2 text-slate-400 text-sm sm:text-base">
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Web Development
+                  <Link href="/projects" className="hover:text-white transition-colors">
+                    Projects
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/team" className="hover:text-white transition-colors">
+                    Team
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="hover:text-white transition-colors">
+                    Reviews
+                  </Link>
+                </li>
+                <li>
+                  <a href="#services" className="hover:text-white transition-colors">
+                    Services
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    AI Applications
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    MVP Development
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Consulting
+                  <a href="#contact" className="hover:text-white transition-colors">
+                    Contact
                   </a>
                 </li>
               </ul>
@@ -1303,36 +1377,6 @@ export default function LandingPage() {
         </div>
       </footer>
 
-      {/* Smart Floating AI Chat Button */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 floating-element">
-        <div className="relative">
-          {/* Pulsing rings */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 opacity-20 animate-ping"></div>
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 opacity-30 animate-pulse"></div>
-
-          {/* Main button */}
-          <button
-            onClick={() => setIsChatOpen(true)}
-            className="relative group bg-gradient-to-r from-cyan-500 to-violet-500 text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 animate-bounce-subtle"
-          >
-            <Bot className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
-
-            {/* Smart notification dot - only shows when there's an unread message */}
-            {hasUnreadMessage && (
-              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse">
-                <div className="absolute inset-0 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-ping"></div>
-              </div>
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Chat Window */}
-      <ChatWindow
-        isOpen={isChatOpen}
-        onClose={() => setIsChatOpen(false)}
-        onNotificationChange={handleChatNotification}
-      />
     </div>
   )
 }

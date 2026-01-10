@@ -1,118 +1,158 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server'
 
-const API_KEY = process.env.GEMINI_API_KEY || "AIzaSyBwKdSnOgVPVEzx5V4Rku1DajkQwAfwlR4";
-const genAI = new GoogleGenerativeAI(API_KEY);
+const GEMINI_API_KEY = 'AIzaSyAG4y_lmu728vT3oRCY49j7UrfqPomOpnI'
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent'
 
-const SYSTEM_INSTRUCTION = `You are Aurora Digital's AI assistant. Aurora Digital is a tech company with a team of 6 expert developers who have delivered 50+ successful projects. 
-
-We specialize in:
-- Web Development (Next.js, React, Full-Stack)
-- Mobile App Development (iOS, Android, React Native)
-- AI Agents & Automation (Chatbots, ML, NLP)
-- Full-Stack Solutions (MVP Development, End-to-End Solutions)
-
-Be helpful, professional, and friendly. Answer questions about our services, pricing, portfolio, and how we can help clients.`;
-
-// Simple fallback responses based on keywords
-function getFallbackResponse(userMessage: string): string {
-  const lowerMessage = userMessage.toLowerCase();
-  
-  if (lowerMessage.includes("service") || lowerMessage.includes("what do you do")) {
-    return "We offer comprehensive web development, mobile app development, AI agents & automation, and full-stack solutions. Our team of 6 expert developers has delivered 50+ successful projects. Would you like to know more about any specific service?";
-  }
-  
-  if (lowerMessage.includes("price") || lowerMessage.includes("cost") || lowerMessage.includes("how much")) {
-    return "Our pricing depends on your project requirements. We offer competitive rates for web development, mobile apps, and AI solutions. For a personalized quote, please share your project details or contact us directly at shafiqueabdurrehman@gmail.com";
-  }
-  
-  if (lowerMessage.includes("portfolio") || lowerMessage.includes("project") || lowerMessage.includes("work")) {
-    return "We've completed 50+ successful projects including e-commerce platforms, healthcare apps, education platforms, and business solutions. You can view our featured projects on our website or visit our projects page to see all our work!";
-  }
-  
-  if (lowerMessage.includes("contact") || lowerMessage.includes("email") || lowerMessage.includes("phone")) {
-    return "You can reach us at:\n📧 Email: shafiqueabdurrehman@gmail.com\n📞 Phone: +92 319-2165662\n📍 Location: NUST H-12, Islamabad, Pakistan\n\nWe'd love to discuss your project!";
-  }
-  
-  return "Thank you for your interest in Aurora Digital! We're a team of 6 expert developers specializing in web development, mobile apps, and AI solutions. For detailed information, please contact us at shafiqueabdurrehman@gmail.com or call +92 319-2165662. We're here to help bring your project to life!";
+export async function GET() {
+  return NextResponse.json({ 
+    status: 'Chatbot API is running',
+    timestamp: new Date().toISOString()
+  })
 }
 
-export async function POST(req: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const body = await req.json();
-    const { messages } = body;
-
-    if (!messages || !Array.isArray(messages) || messages.length === 0) {
-      return NextResponse.json(
-        { error: "Messages array is required" },
-        { status: 400 }
-      );
-    }
-
-    // Get the last user message
-    const lastMessage = messages[messages.length - 1];
-    const userMessageText = lastMessage.parts?.[0]?.text || lastMessage.content || "";
-
-    if (!userMessageText.trim()) {
-      return NextResponse.json(
-        { error: "Message content is required" },
-        { status: 400 }
-      );
-    }
-
-    // Try to use Gemini AI, with fallback to simple responses
-    try {
-      // Try different model names
-      const modelNames = [
-        "gemini-1.5-flash-latest",
-        "gemini-1.5-pro-latest", 
-        "gemini-1.5-flash",
-        "gemini-1.5-pro"
-      ];
-      
-      let model;
-      let lastError;
-      
-      for (const modelName of modelNames) {
-        try {
-          model = genAI.getGenerativeModel({ 
-            model: modelName,
-            systemInstruction: SYSTEM_INSTRUCTION,
-          });
-          
-          // Try to generate content
-          const result = await model.generateContent(userMessageText);
-          const response = await result.response;
-          const text = response.text();
-          
-          return NextResponse.json({ reply: text });
-        } catch (modelError: any) {
-          lastError = modelError;
-          console.log(`Model ${modelName} failed:`, modelError.message);
-          continue;
-        }
-      }
-      
-      // If all models failed, use fallback
-      console.warn("All Gemini models failed, using fallback response. Last error:", lastError?.message);
-      const fallbackResponse = getFallbackResponse(userMessageText);
-      return NextResponse.json({ reply: fallbackResponse });
-      
-    } catch (aiError: any) {
-      console.error("AI service error:", aiError);
-      // Use intelligent fallback
-      const fallbackResponse = getFallbackResponse(userMessageText);
-      return NextResponse.json({ reply: fallbackResponse });
-    }
+    console.log('Chatbot API: Request received')
     
-  } catch (e: any) {
-    console.error("Chat API Error:", e);
-    return NextResponse.json(
-      { 
-        error: e.message || "Something went wrong",
-        reply: "I'm sorry, I'm having trouble processing your request right now. Please contact us directly at shafiqueabdurrehman@gmail.com or call +92 319-2165662 for immediate assistance."
+    const { message, conversationHistory, history } = await request.json()
+    console.log('Chatbot API: Message received:', message)
+
+    if (!message) {
+      console.log('Chatbot API: No message provided')
+      return NextResponse.json({ error: 'Message is required' }, { status: 400 })
+    }
+
+    // Build conversation history context - support both formats
+    let conversationHistoryStr = conversationHistory || 'This is the start of the conversation.'
+    if (history && Array.isArray(history) && history.length > 1) {
+      const historyToUse = history.slice(1) // Skip the initial greeting
+      conversationHistoryStr = historyToUse.map((msg: { role: string; content: string }) => {
+        if (msg.role === "user") {
+          return `User: ${msg.content}`
+        } else if (msg.role === "model" || msg.role === "assistant") {
+          return `Assistant: ${msg.content}`
+        }
+        return null
+      }).filter(Boolean).join('\n')
+    }
+
+    // Create context for the AI about your business
+    const systemPrompt = `You are a helpful customer service chatbot for Aurora Digital, a web development agency. 
+
+Company Information:
+- We are a team of 6 expert developers specializing in web development, mobile apps, and AI agents
+- We have delivered 50+ successful projects
+- We provide 100% client satisfaction
+- Located at NUST H-12, Islamabad, Pakistan
+
+Our Services:
+1. Web Development: Scalable web applications built with Next.js, React, and modern frameworks. Fast, SEO-optimized, and designed to grow with your business.
+2. Mobile App Development: Native and cross-platform mobile applications for iOS and Android. Beautiful UI/UX and seamless performance.
+3. AI Agents & Automation: Intelligent AI agents, chatbots, and automation systems. Transform your business with cutting-edge AI capabilities.
+4. Full-Stack Solutions: End-to-end development from concept to deployment. MVP development, scaling, and ongoing support.
+
+Contact Information:
+- Email: shafiqueabdurrehman@gmail.com
+- Phone: +92 319-2165662
+- Location: NUST H-12, Islamabad, Pakistan
+
+Our Expertise:
+- Full-stack web development with Next.js, React, and modern frameworks
+- Native and cross-platform mobile app development
+- AI agent development and intelligent automation systems
+- MVP development and rapid prototyping for startups
+
+Portfolio Highlights:
+We've worked on projects including e-commerce platforms (Bedo Living, Clothique Style Hub), healthcare applications (Breast MRI), education platforms (LearnHub), business solutions, legal services, and more.
+
+Your role:
+- Help potential clients understand our services and expertise
+- Answer questions about our projects, technologies, and capabilities
+- Be friendly, professional, and helpful
+- Provide accurate information about our services
+- Encourage clients to reach out via the contact form or email for project inquiries
+- Keep responses concise but informative
+- Always be encouraging about our services and expertise
+- If you don't know something specific, offer to connect them with our support team
+
+Previous conversation context: ${conversationHistoryStr}
+
+Customer's current message: ${message}
+
+Please respond as the Aurora Digital chatbot:`
+
+    const requestBody = {
+      contents: [{
+        parts: [{
+          text: systemPrompt
+        }]
+      }],
+      generationConfig: {
+        temperature: 0.7,
+        topK: 40,
+        topP: 0.95,
+        maxOutputTokens: 1024,
       },
-      { status: 500 }
-    );
+      safetySettings: [
+        {
+          category: "HARM_CATEGORY_HARASSMENT",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE"
+        },
+        {
+          category: "HARM_CATEGORY_HATE_SPEECH",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE"
+        },
+        {
+          category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE"
+        },
+        {
+          category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+          threshold: "BLOCK_MEDIUM_AND_ABOVE"
+        }
+      ]
+    }
+
+    console.log('Chatbot API: Making request to Gemini API')
+    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody)
+    })
+
+    console.log('Chatbot API: Gemini response status:', response.status)
+
+    if (!response.ok) {
+      const errorText = await response.text()
+      console.error('Gemini API error:', response.status, response.statusText, errorText)
+      return NextResponse.json({ 
+        error: 'Failed to get AI response',
+        fallback: "I'm having trouble connecting to our AI assistant right now. Please contact us directly at shafiqueabdurrehman@gmail.com or +92 319-2165662 for immediate assistance."
+      }, { status: 500 })
+    }
+
+    const data = await response.json()
+    console.log('Chatbot API: Gemini response data:', JSON.stringify(data, null, 2))
+    
+    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+      const aiResponse = data.candidates[0].content.parts[0].text
+      console.log('Chatbot API: AI response generated successfully')
+      return NextResponse.json({ response: aiResponse })
+    } else {
+      console.error('Unexpected Gemini API response:', data)
+      return NextResponse.json({ 
+        error: 'Invalid AI response',
+        fallback: "I'm having trouble processing your request right now. Please contact us directly at shafiqueabdurrehman@gmail.com or +92 319-2165662 for immediate assistance."
+      }, { status: 500 })
+    }
+
+  } catch (error) {
+    console.error('Chatbot API error:', error)
+    return NextResponse.json({ 
+      error: 'Internal server error',
+      fallback: "I'm experiencing technical difficulties. Please contact us directly at shafiqueabdurrehman@gmail.com or +92 319-2165662 for immediate assistance."
+    }, { status: 500 })
   }
 }

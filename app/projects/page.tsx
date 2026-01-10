@@ -30,7 +30,6 @@ import {
 import Link from "next/link"
 import { ThemeToggle } from "../../components/theme-toggle"
 import { useState, useEffect } from "react"
-import { ChatWindow } from "../../components/chat-window"
 
 const projects = [
   {
@@ -38,7 +37,7 @@ const projects = [
     title: "Bedo Living",
     description:
       "Premium mattress and bedding e-commerce platform with comprehensive product catalog, shopping cart, and checkout system.",
-    image: "https://placehold.co/600x400/10b981/ffffff?text=Bedo+Living",
+    image: "/images/bedoraliving.png",
     category: "E-commerce",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
     features: ["Product Catalog", "Shopping Cart", "Checkout System", "Admin Dashboard"],
@@ -53,7 +52,7 @@ const projects = [
     id: 2,
     title: "Echelon Texas",
     description: "Professional business website showcasing services and expertise with modern design and user experience.",
-    image: "https://placehold.co/600x400/3b82f6/ffffff?text=Echelon+Texas",
+    image: "/images/echelon.png",
     category: "Business",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     features: ["Service Showcase", "Contact Forms", "Responsive Design", "Modern UI"],
@@ -68,7 +67,7 @@ const projects = [
     id: 3,
     title: "Hit Specialist",
     description: "Specialized platform for targeted services with advanced features and user management.",
-    image: "https://placehold.co/600x400/a855f7/ffffff?text=Hit+Specialist",
+    image: "/images/hireitspecialist.png",
     category: "Business",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     features: ["User Management", "Service Booking", "Dashboard", "Analytics"],
@@ -83,7 +82,7 @@ const projects = [
     id: 4,
     title: "Baro Portal",
     description: "Legal services portal providing comprehensive legal information and case management features.",
-    image: "https://placehold.co/600x400/64748b/ffffff?text=Baro+Portal",
+    image: "/images/baro.png",
     category: "Legal",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     features: ["Case Management", "Legal Resources", "Document Access", "User Portal"],
@@ -98,7 +97,7 @@ const projects = [
     id: 5,
     title: "Altman Project",
     description: "Innovative project platform with advanced features and modern architecture.",
-    image: "https://placehold.co/600x400/f59e0b/ffffff?text=Altman+Project",
+    image: "/images/altman.png",
     category: "Business",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     features: ["Project Management", "Dashboard", "Analytics", "User Interface"],
@@ -113,7 +112,7 @@ const projects = [
     id: 6,
     title: "Suaren",
     description: "Modern web application with sleek design and powerful functionality.",
-    image: "https://placehold.co/600x400/06b6d4/ffffff?text=Suaren",
+    image: "/images/suran.png",
     category: "Business",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     features: ["Modern UI", "Responsive Design", "Fast Performance", "User Experience"],
@@ -128,7 +127,7 @@ const projects = [
     id: 7,
     title: "Fluxly",
     description: "Platform with authentication system and comprehensive user management features.",
-    image: "https://placehold.co/600x400/8b5cf6/ffffff?text=Fluxly",
+    image: "/images/fluxy.png",
     category: "Business",
     technologies: ["Next.js", "React", "TypeScript", "Authentication"],
     features: ["User Authentication", "Dashboard", "User Management", "Secure Login"],
@@ -143,7 +142,7 @@ const projects = [
     id: 8,
     title: "Hideout Winter Series",
     description: "Golf tournament management platform for event registration and information.",
-    image: "https://placehold.co/600x400/eab308/ffffff?text=Hideout+Winter+Series",
+    image: "/images/hideout.png",
     category: "Events",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     features: ["Event Registration", "Tournament Info", "Schedule Management", "Results"],
@@ -158,7 +157,7 @@ const projects = [
     id: 9,
     title: "Consulting Services",
     description: "Professional consulting services platform with service showcase and client management.",
-    image: "https://placehold.co/600x400/4f46e5/ffffff?text=Consulting+Services",
+    image: "/images/socialforma.png",
     category: "Consulting",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     features: ["Service Portfolio", "Client Management", "Consultation Booking", "Case Studies"],
@@ -173,7 +172,7 @@ const projects = [
     id: 10,
     title: "One Million Dollar Company",
     description: "Business platform showcasing company services and achievements with modern design.",
-    image: "https://placehold.co/600x400/10b981/ffffff?text=One+Million+Dollar+Company",
+    image: "/images/oneman.png",
     category: "Business",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     features: ["Company Showcase", "Service Display", "Achievement Highlights", "Contact Forms"],
@@ -188,7 +187,7 @@ const projects = [
     id: 11,
     title: "LearnHub",
     description: "Interactive learning platform with courses, progress tracking, and educational resources.",
-    image: "https://placehold.co/600x400/3b82f6/ffffff?text=LearnHub",
+    image: "/images/learnhub.png",
     category: "Education",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     features: ["Course Management", "Progress Tracking", "Learning Resources", "User Dashboard"],
@@ -203,11 +202,11 @@ const projects = [
     id: 12,
     title: "Breast MRI",
     description: "Healthcare platform for medical imaging services with patient management and appointment scheduling.",
-    image: "https://placehold.co/600x400/ec4899/ffffff?text=Breast+MRI",
+    image: "/images/breast.png",
     category: "Healthcare",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     features: ["Appointment Scheduling", "Patient Portal", "Medical Records", "Service Information"],
-    liveUrl: "https://breastmri.vercel.app/",
+    liveUrl: "https://breastmri-ymdm.vercel.app/",
     githubUrl: "https://github.com/Abdulah-eng/breastmri",
     completedDate: "2024-12-10",
     clientType: "Healthcare",
@@ -218,7 +217,7 @@ const projects = [
     id: 13,
     title: "Clothique Style Hub",
     description: "Fashion e-commerce platform with product catalog, shopping cart, and style recommendations.",
-    image: "https://placehold.co/600x400/d946ef/ffffff?text=Clothique+Style+Hub",
+    image: "/images/clothing.png",
     category: "E-commerce",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     features: ["Product Catalog", "Shopping Cart", "Style Recommendations", "Checkout System"],
@@ -235,7 +234,6 @@ const categories = ["All", "E-commerce", "Healthcare", "Education", "Business", 
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All")
-  const [isChatOpen, setIsChatOpen] = useState(false)
   const [isVisible, setIsVisible] = useState({
     hero: false,
     projects: false,
@@ -400,6 +398,12 @@ export default function ProjectsPage() {
                 Projects
               </Link>
               <Link
+                href="/team"
+                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors text-sm lg:text-base"
+              >
+                Team
+              </Link>
+              <Link
                 href="/#about"
                 className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors text-sm lg:text-base"
               >
@@ -412,9 +416,6 @@ export default function ProjectsPage() {
                 Contact
               </Link>
               <ThemeToggle />
-              <button className="bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-4 lg:px-6 py-2 rounded-lg hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 text-sm lg:text-base btn-responsive">
-                Get Started
-              </button>
             </div>
 
             {/* Mobile Navigation */}
@@ -448,6 +449,20 @@ export default function ProjectsPage() {
                   Projects
                 </Link>
                 <Link
+                  href="/team"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Team
+                </Link>
+                <Link
+                  href="/testimonials"
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Reviews
+                </Link>
+                <Link
                   href="/#about"
                   className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -461,9 +476,6 @@ export default function ProjectsPage() {
                 >
                   Contact
                 </Link>
-                <button className="bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 py-2 rounded-lg hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg text-left">
-                  Get Started
-                </button>
               </div>
             </div>
           )}
@@ -709,13 +721,6 @@ export default function ProjectsPage() {
               Let's discuss how we can bring your vision to life with cutting-edge technology and innovative design.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <button
-                onClick={() => setIsChatOpen(true)}
-                className="group bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105 btn-responsive"
-              >
-                <Bot className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform flex-shrink-0" />
-                Talk to our AI Agent
-              </button>
               <Link
                 href="/#contact"
                 className="border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-2 transform hover:scale-105 btn-responsive"
@@ -740,10 +745,10 @@ export default function ProjectsPage() {
                 Building the future of web development with AI-powered solutions and human creativity.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
+                <a href="https://github.com/Abdulah-eng/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
                   <Github className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
-                <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
+                <a href="https://www.linkedin.com/in/muhammad-abdullah-575819355" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
                   <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
               </div>
@@ -760,6 +765,16 @@ export default function ProjectsPage() {
                 <li>
                   <Link href="/projects" className="hover:text-white transition-colors">
                     Projects
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/team" className="hover:text-white transition-colors">
+                    Team
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/testimonials" className="hover:text-white transition-colors">
+                    Reviews
                   </Link>
                 </li>
                 <li>
@@ -796,25 +811,6 @@ export default function ProjectsPage() {
         </div>
       </footer>
 
-      {/* Enhanced Floating AI Chat Button */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 floating-element">
-        <div className="relative">
-          {/* Pulsing rings */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 opacity-20 animate-ping"></div>
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 opacity-30 animate-pulse"></div>
-
-          {/* Main button */}
-          <button
-            onClick={() => setIsChatOpen(true)}
-            className="relative group bg-gradient-to-r from-cyan-500 to-violet-500 text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 animate-bounce-subtle"
-          >
-            <Bot className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
-          </button>
-        </div>
-      </div>
-
-      {/* Chat Window */}
-      <ChatWindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   )
 }
