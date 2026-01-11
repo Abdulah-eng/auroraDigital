@@ -151,8 +151,8 @@ export function Testimonials() {
           }`}
         >
           <div className="flex justify-center mb-4">
-            <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2">
-              <Star className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+            <div className="flex items-center gap-2 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 border border-[#1C437E]/30 dark:border-[#1C437E]/40 rounded-full px-3 sm:px-4 py-2">
+              <Star className="w-3 h-3 sm:w-4 sm:h-4 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0" />
               <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Client Reviews</span>
             </div>
           </div>
@@ -166,8 +166,8 @@ export function Testimonials() {
 
         {/* Stats Row - Moved to top */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12">
-          <div className="text-center bg-gradient-to-br from-cyan-50 to-cyan-100 dark:from-cyan-900/20 dark:to-cyan-800/20 p-4 sm:p-6 rounded-2xl border border-cyan-200 dark:border-cyan-800/50 shadow-lg">
-            <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent mb-2">
+          <div className="text-center bg-[#1C437E]/5 dark:bg-[#1C437E]/10 p-4 sm:p-6 rounded-2xl border border-[#1C437E]/20 dark:border-[#1C437E]/30 shadow-lg">
+            <div className="text-3xl sm:text-4xl font-bold text-[#1C437E] dark:text-[#4A7BC8] mb-2">
               5.0
             </div>
             <div className="flex justify-center gap-0.5 mb-2">
@@ -177,22 +177,22 @@ export function Testimonials() {
             </div>
             <div className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Average Rating</div>
           </div>
-          <div className="text-center bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-900/20 dark:to-violet-800/20 p-4 sm:p-6 rounded-2xl border border-violet-200 dark:border-violet-800/50 shadow-lg">
-            <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent mb-2">
+          <div className="text-center bg-[#1C437E]/5 dark:bg-[#1C437E]/10 p-4 sm:p-6 rounded-2xl border border-[#1C437E]/20 dark:border-[#1C437E]/30 shadow-lg">
+            <div className="text-3xl sm:text-4xl font-bold text-[#1C437E] dark:text-[#4A7BC8] mb-2">
               {testimonials.length}+
             </div>
             <div className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Happy Clients</div>
             <div className="text-xs text-slate-500 dark:text-slate-400">Worldwide</div>
           </div>
-          <div className="text-center bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/20 p-4 sm:p-6 rounded-2xl border border-pink-200 dark:border-pink-800/50 shadow-lg">
-            <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-2">
+          <div className="text-center bg-[#95BF3D]/10 dark:bg-[#95BF3D]/20 p-4 sm:p-6 rounded-2xl border border-[#95BF3D]/30 dark:border-[#95BF3D]/40 shadow-lg">
+            <div className="text-3xl sm:text-4xl font-bold text-[#95BF3D] dark:text-[#A8D04A] mb-2">
               {testimonials.filter((t) => t.isRepeatClient).length}+
             </div>
             <div className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Repeat Clients</div>
             <div className="text-xs text-slate-500 dark:text-slate-400">Trusted Partners</div>
           </div>
-          <div className="text-center bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20 p-4 sm:p-6 rounded-2xl border border-emerald-200 dark:border-emerald-800/50 shadow-lg">
-            <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent mb-2">
+          <div className="text-center bg-[#95BF3D]/10 dark:bg-[#95BF3D]/20 p-4 sm:p-6 rounded-2xl border border-[#95BF3D]/30 dark:border-[#95BF3D]/40 shadow-lg">
+            <div className="text-3xl sm:text-4xl font-bold text-[#95BF3D] dark:text-[#A8D04A] mb-2">
               100%
             </div>
             <div className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Satisfaction</div>
@@ -205,17 +205,17 @@ export function Testimonials() {
           {displayedTestimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-cyan-300 dark:hover:border-cyan-700 transform hover:-translate-y-2 relative overflow-hidden ${
+              className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-[#1C437E]/50 dark:hover:border-[#4A7BC8]/50 transform hover:-translate-y-2 relative overflow-hidden ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               {/* Gradient accent */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-600 via-violet-600 to-pink-600"></div>
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1C437E] via-[#2D5A9E] to-[#95BF3D]"></div>
               
               {/* Quote icon */}
               <div className="absolute top-6 right-6 opacity-10 dark:opacity-5">
-                <Quote className="w-16 h-16 text-cyan-600" />
+                <Quote className="w-16 h-16 text-[#1C437E]" />
               </div>
 
               <div className="relative">
@@ -265,7 +265,7 @@ export function Testimonials() {
               onClick={() => setCurrentIndex(index * 3)}
               className={`h-2 rounded-full transition-all duration-300 ${
                 Math.floor(currentIndex / 3) === index
-                  ? "bg-gradient-to-r from-cyan-600 to-violet-600 w-8 shadow-lg"
+                  ? "bg-[#1C437E] w-8 shadow-lg"
                   : "bg-slate-300 dark:bg-slate-700 w-2 hover:bg-slate-400 dark:hover:bg-slate-600"
               }`}
               aria-label={`Go to testimonial set ${index + 1}`}

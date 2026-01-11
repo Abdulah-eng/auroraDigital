@@ -116,7 +116,7 @@ export function ChatWindow() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-cyan-600 to-violet-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center w-16 h-16"
+        className="fixed bottom-6 right-6 z-50 bg-[#1C437E] hover:bg-[#153A6B] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center w-16 h-16"
         aria-label="Open chat"
       >
         <Bot className="w-6 h-6" />
@@ -133,7 +133,7 @@ export function ChatWindow() {
       }`}
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800 bg-gradient-to-r from-cyan-600 to-violet-600 rounded-t-2xl">
+      <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800 bg-[#1C437E] rounded-t-2xl">
         <div className="flex items-center gap-2 text-white">
           <Bot className="w-5 h-5" />
           <span className="font-semibold">Aurora Digital AI</span>
@@ -172,16 +172,16 @@ export function ChatWindow() {
                 }`}
               >
                 {message.role === "assistant" && (
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-600 to-violet-600 flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-[#1C437E] flex items-center justify-center flex-shrink-0">
                     <Bot className="w-4 h-4 text-white" />
                   </div>
                 )}
                 <div
-                  className={`max-w-[80%] rounded-lg px-4 py-2 ${
-                    message.role === "user"
-                      ? "bg-gradient-to-r from-cyan-600 to-violet-600 text-white"
-                      : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100"
-                  }`}
+                className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                  message.role === "user"
+                    ? "bg-[#1C437E] text-white"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100"
+                }`}
                 >
                   <p className="text-sm whitespace-pre-wrap break-words">
                     {message.content}
@@ -219,13 +219,13 @@ export function ChatWindow() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm"
+                className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#1C437E] focus:border-transparent text-sm"
                 disabled={isLoading}
               />
               <Button
                 onClick={handleSend}
                 disabled={!input.trim() || isLoading}
-                className="bg-gradient-to-r from-cyan-600 to-violet-600 hover:from-cyan-700 hover:to-violet-700 text-white px-4 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[#1C437E] hover:bg-[#153A6B] text-white px-4 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
                   <Loader2 className="w-4 h-4 animate-spin" />

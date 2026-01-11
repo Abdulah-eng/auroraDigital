@@ -216,7 +216,7 @@ export default function TestimonialsPage() {
                   </circle>
 
                   {/* Orbiting particles */}
-                  <circle cx="26" cy="16" r="1.5" fill="#06b6d4" opacity="0.7">
+                  <circle cx="26" cy="16" r="1.5" fill="#1C437E" opacity="0.7">
                     <animateTransform
                       attributeName="transform"
                       type="rotate"
@@ -227,7 +227,7 @@ export default function TestimonialsPage() {
                     <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite" />
                   </circle>
 
-                  <circle cx="6" cy="16" r="1" fill="#8b5cf6" opacity="0.7">
+                  <circle cx="6" cy="16" r="1" fill="#95BF3D" opacity="0.7">
                     <animateTransform
                       attributeName="transform"
                       type="rotate"
@@ -240,26 +240,26 @@ export default function TestimonialsPage() {
 
                   <defs>
                     <linearGradient id="outerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#06b6d4" />
-                      <stop offset="50%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#06b6d4" />
+                      <stop offset="0%" stopColor="#1C437E" />
+                      <stop offset="50%" stopColor="#2D5A9E" />
+                      <stop offset="100%" stopColor="#1C437E" />
                     </linearGradient>
                     <linearGradient id="middleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#06b6d4" />
+                      <stop offset="0%" stopColor="#2D5A9E" />
+                      <stop offset="100%" stopColor="#1C437E" />
                     </linearGradient>
                     <radialGradient id="innerGradient" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.4" />
+                      <stop offset="0%" stopColor="#1C437E" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#95BF3D" stopOpacity="0.4" />
                     </radialGradient>
                     <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#ffffff" />
-                      <stop offset="100%" stopColor="#06b6d4" />
+                      <stop offset="100%" stopColor="#1C437E" />
                     </radialGradient>
                   </defs>
                 </svg>
                 <span className="hidden sm:inline">Aurora</span>
-                <span className="text-cyan-600 dark:text-cyan-400 hidden sm:inline">Digital</span>
+                <span className="text-[#1C437E] dark:text-[#4A7BC8] hidden sm:inline">Digital</span>
                 <span className="sm:hidden">Aurora</span>
               </Link>
             </div>
@@ -375,14 +375,14 @@ export default function TestimonialsPage() {
             id="hero"
           >
             <div className="flex justify-center mb-6">
-              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2 animate-bounce-subtle">
-                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+              <div className="flex items-center gap-2 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 border border-[#1C437E]/30 dark:border-[#1C437E]/40 rounded-full px-3 sm:px-4 py-2 animate-bounce-subtle">
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Client Reviews</span>
               </div>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">
               What Our{" "}
-              <span className="bg-gradient-to-r from-cyan-600 to-violet-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#1C437E] to-[#2D5A9E] bg-clip-text text-transparent">
                 Clients Say
               </span>
             </h1>
@@ -398,8 +398,8 @@ export default function TestimonialsPage() {
       <section className="py-8 sm:py-12 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            <div className="text-center bg-gradient-to-br from-cyan-50 to-cyan-100 dark:from-cyan-900/20 dark:to-cyan-800/20 p-4 sm:p-6 rounded-2xl border border-cyan-200 dark:border-cyan-800/50 shadow-lg">
-              <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent mb-2">
+            <div className="text-center bg-[#1C437E]/5 dark:bg-[#1C437E]/10 p-4 sm:p-6 rounded-2xl border border-[#1C437E]/20 dark:border-[#1C437E]/30 shadow-lg">
+              <div className="text-3xl sm:text-4xl font-bold text-[#1C437E] dark:text-[#4A7BC8] mb-2">
                 5.0
               </div>
               <div className="flex justify-center gap-0.5 mb-2">
@@ -409,22 +409,22 @@ export default function TestimonialsPage() {
               </div>
               <div className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Average Rating</div>
             </div>
-            <div className="text-center bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-900/20 dark:to-violet-800/20 p-4 sm:p-6 rounded-2xl border border-violet-200 dark:border-violet-800/50 shadow-lg">
-              <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent mb-2">
+            <div className="text-center bg-[#1C437E]/5 dark:bg-[#1C437E]/10 p-4 sm:p-6 rounded-2xl border border-[#1C437E]/20 dark:border-[#1C437E]/30 shadow-lg">
+              <div className="text-3xl sm:text-4xl font-bold text-[#1C437E] dark:text-[#4A7BC8] mb-2">
                 {testimonials.length}+
               </div>
               <div className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Happy Clients</div>
               <div className="text-xs text-slate-500 dark:text-slate-400">Worldwide</div>
             </div>
-            <div className="text-center bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/20 p-4 sm:p-6 rounded-2xl border border-pink-200 dark:border-pink-800/50 shadow-lg">
-              <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-2">
+            <div className="text-center bg-[#95BF3D]/10 dark:bg-[#95BF3D]/20 p-4 sm:p-6 rounded-2xl border border-[#95BF3D]/30 dark:border-[#95BF3D]/40 shadow-lg">
+              <div className="text-3xl sm:text-4xl font-bold text-[#95BF3D] dark:text-[#A8D04A] mb-2">
                 {testimonials.filter((t) => t.isRepeatClient).length}+
               </div>
               <div className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Repeat Clients</div>
               <div className="text-xs text-slate-500 dark:text-slate-400">Trusted Partners</div>
             </div>
-            <div className="text-center bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20 p-4 sm:p-6 rounded-2xl border border-emerald-200 dark:border-emerald-800/50 shadow-lg">
-              <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent mb-2">
+            <div className="text-center bg-[#95BF3D]/10 dark:bg-[#95BF3D]/20 p-4 sm:p-6 rounded-2xl border border-[#95BF3D]/30 dark:border-[#95BF3D]/40 shadow-lg">
+              <div className="text-3xl sm:text-4xl font-bold text-[#95BF3D] dark:text-[#A8D04A] mb-2">
                 100%
               </div>
               <div className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Satisfaction</div>
@@ -441,7 +441,7 @@ export default function TestimonialsPage() {
             {testimonials.map((testimonial, index) => (
               <div
                 key={testimonial.id}
-                className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-cyan-300 dark:hover:border-cyan-700 transform hover:-translate-y-2 relative overflow-hidden ${
+                className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-[#1C437E]/50 dark:hover:border-[#4A7BC8]/50 transform hover:-translate-y-2 relative overflow-hidden ${
                   isVisible.testimonials ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 data-animate
@@ -449,11 +449,11 @@ export default function TestimonialsPage() {
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {/* Gradient accent */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-600 via-violet-600 to-pink-600"></div>
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1C437E] via-[#2D5A9E] to-[#95BF3D]"></div>
 
                 {/* Quote icon */}
                 <div className="absolute top-6 right-6 opacity-10 dark:opacity-5">
-                  <Quote className="w-16 h-16 text-cyan-600" />
+                  <Quote className="w-16 h-16 text-[#1C437E]" />
                 </div>
 
                 <div className="relative">
@@ -471,7 +471,7 @@ export default function TestimonialsPage() {
 
                   {/* Author Info */}
                   <div className="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-600 to-violet-600 flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
+                    <div className="w-12 h-12 rounded-full bg-[#1C437E] flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
                       {testimonial.name.charAt(0).toUpperCase()}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -496,7 +496,7 @@ export default function TestimonialsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-20 bg-gradient-to-r from-cyan-50 to-violet-50 dark:from-slate-900 dark:to-slate-800">
+      <section className="py-12 sm:py-20 bg-[#F5F7FA] dark:from-slate-900 dark:to-slate-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Ready to Join Our Happy Clients?
@@ -507,7 +507,7 @@ export default function TestimonialsPage() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Link
               href="/#contact"
-              className="bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 transform hover:scale-105"
+              className="bg-[#1C437E] hover:bg-[#153A6B] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 transform hover:scale-105"
             >
               Get Started
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
@@ -529,7 +529,7 @@ export default function TestimonialsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-x-3">
             <div className="md:col-span-2">
               <div className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
-                Aurora <span className="text-cyan-400">Digital</span>
+                Aurora <span className="text-[#4A7BC8]">Digital</span>
               </div>
               <p className="text-slate-400 mb-3 sm:mb-4 text-sm sm:text-base max-w-lg">
                 Building the future of web development with AI-powered solutions and human creativity.
@@ -539,7 +539,7 @@ export default function TestimonialsPage() {
                   href="https://github.com/Abdulah-eng/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110"
+                  className="text-slate-400 hover:text-[#1C437E] dark:hover:text-[#4A7BC8] transition-colors transform hover:scale-110"
                 >
                   <Github className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
@@ -547,7 +547,7 @@ export default function TestimonialsPage() {
                   href="https://www.linkedin.com/in/muhammad-abdullah-575819355"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110"
+                  className="text-slate-400 hover:text-[#1C437E] dark:hover:text-[#4A7BC8] transition-colors transform hover:scale-110"
                 >
                   <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>

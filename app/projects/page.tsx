@@ -76,7 +76,7 @@ const projects = [
     completedDate: "2024-03-20",
     clientType: "Business",
     icon: Target,
-    color: "from-purple-500 to-pink-600",
+    color: "from-[#1C437E] to-[#2D5A9E]",
   },
   {
     id: 4,
@@ -121,7 +121,7 @@ const projects = [
     completedDate: "2024-06-10",
     clientType: "Business",
     icon: Globe,
-    color: "from-cyan-500 to-teal-600",
+    color: "from-[#1C437E] to-[#2D5A9E]",
   },
   {
     id: 7,
@@ -136,7 +136,7 @@ const projects = [
     completedDate: "2024-07-20",
     clientType: "Business",
     icon: Users,
-    color: "from-violet-500 to-purple-600",
+    color: "from-[#95BF3D] to-[#A8D04A]",
   },
   {
     id: 8,
@@ -226,7 +226,7 @@ const projects = [
     completedDate: "2025-01-05",
     clientType: "Fashion E-commerce",
     icon: Shirt,
-    color: "from-fuchsia-500 to-pink-600",
+    color: "from-[#1C437E] to-[#2D5A9E]",
   },
 ]
 
@@ -338,7 +338,7 @@ export default function ProjectsPage() {
                   </circle>
 
                   {/* Orbiting particles */}
-                  <circle cx="26" cy="16" r="1.5" fill="#06b6d4" opacity="0.7">
+                  <circle cx="26" cy="16" r="1.5" fill="#1C437E" opacity="0.7">
                     <animateTransform
                       attributeName="transform"
                       type="rotate"
@@ -349,7 +349,7 @@ export default function ProjectsPage() {
                     <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite" />
                   </circle>
 
-                  <circle cx="6" cy="16" r="1" fill="#8b5cf6" opacity="0.7">
+                  <circle cx="6" cy="16" r="1" fill="#95BF3D" opacity="0.7">
                     <animateTransform
                       attributeName="transform"
                       type="rotate"
@@ -381,7 +381,7 @@ export default function ProjectsPage() {
                   </defs>
                 </svg>
                 <span className="hidden sm:inline">Aurora</span>
-                <span className="text-cyan-600 dark:text-cyan-400 hidden sm:inline">Digital</span>
+                <span className="text-[#1C437E] dark:text-[#4A7BC8] hidden sm:inline">Digital</span>
                 <span className="sm:hidden">Aurora</span>
               </Link>
             </div>
@@ -507,14 +507,14 @@ export default function ProjectsPage() {
             id="hero"
           >
             <div className="flex justify-center mb-6">
-              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2 animate-bounce-subtle">
-                <Globe className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+              <div className="flex items-center gap-2 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 border border-[#1C437E]/30 dark:border-[#1C437E]/40 rounded-full px-3 sm:px-4 py-2 animate-bounce-subtle">
+                <Globe className="w-3 h-3 sm:w-4 sm:h-4 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Our Portfolio</span>
               </div>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">
               Our{" "}
-              <span className="bg-gradient-to-r from-cyan-600 to-violet-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#1C437E] to-[#2D5A9E] bg-clip-text text-transparent">
                 Projects
               </span>
             </h1>
@@ -536,7 +536,7 @@ export default function ProjectsPage() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all transform hover:scale-105 btn-responsive ${
                   selectedCategory === category
-                    ? "bg-gradient-to-r from-cyan-600 to-violet-600 text-white shadow-lg"
+                    ? "bg-[#1C437E] hover:bg-[#153A6B] text-white shadow-lg"
                     : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
@@ -571,8 +571,8 @@ export default function ProjectsPage() {
             </rect>
             <defs>
               <linearGradient id="projectGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#06b6d4" />
-                <stop offset="100%" stopColor="#8b5cf6" />
+                <stop offset="0%" stopColor="#1C437E" />
+                <stop offset="100%" stopColor="#2D5A9E" />
               </linearGradient>
             </defs>
           </svg>
@@ -639,7 +639,7 @@ export default function ProjectsPage() {
 
                   {/* Project Content */}
                   <div className="p-4 sm:p-6">
-                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#1C437E] dark:group-hover:text-[#4A7BC8] transition-colors">
                       {project.title}
                     </h3>
                     <p className="text-slate-600 dark:text-slate-300 text-sm mb-3 sm:mb-4 line-clamp-2">
@@ -681,7 +681,7 @@ export default function ProjectsPage() {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:from-cyan-700 hover:to-violet-700 transition-all flex items-center justify-center gap-1 sm:gap-2 transform hover:scale-105 btn-responsive"
+                        className="flex-1 bg-[#1C437E] hover:bg-[#153A6B] text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center justify-center gap-1 sm:gap-2 transform hover:scale-105 btn-responsive"
                       >
                         <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                         <span className="hidden sm:inline">Live Demo</span>
@@ -705,7 +705,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-20 bg-gradient-to-r from-cyan-50 to-violet-50 dark:from-slate-900 dark:to-slate-800">
+      <section className="py-12 sm:py-20 bg-[#F5F7FA] dark:from-slate-900 dark:to-slate-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div
             className={`transition-all duration-1000 ${
@@ -739,16 +739,16 @@ export default function ProjectsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-x-3">
             <div className="md:col-span-2">
               <div className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
-                Aurora <span className="text-cyan-400">Digital</span>
+                Aurora <span className="text-[#4A7BC8]">Digital</span>
               </div>
               <p className="text-slate-400 mb-3 sm:mb-4 text-sm sm:text-base max-w-lg">
                 Building the future of web development with AI-powered solutions and human creativity.
               </p>
               <div className="flex space-x-4">
-                <a href="https://github.com/Abdulah-eng/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
+                <a href="https://github.com/Abdulah-eng/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-[#1C437E] dark:hover:text-[#4A7BC8] transition-colors transform hover:scale-110">
                   <Github className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
-                <a href="https://www.linkedin.com/in/muhammad-abdullah-575819355" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
+                <a href="https://www.linkedin.com/in/muhammad-abdullah-575819355" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-[#1C437E] dark:hover:text-[#4A7BC8] transition-colors transform hover:scale-110">
                   <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
               </div>

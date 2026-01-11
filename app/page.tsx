@@ -244,7 +244,7 @@ export default function LandingPage() {
                   </circle>
 
                   {/* Orbiting particles */}
-                  <circle cx="26" cy="16" r="1.5" fill="#06b6d4" opacity="0.7">
+                  <circle cx="26" cy="16" r="1.5" fill="#1C437E" opacity="0.7">
                     <animateTransform
                       attributeName="transform"
                       type="rotate"
@@ -255,7 +255,7 @@ export default function LandingPage() {
                     <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite" />
                   </circle>
 
-                  <circle cx="6" cy="16" r="1" fill="#8b5cf6" opacity="0.7">
+                  <circle cx="6" cy="16" r="1" fill="#95BF3D" opacity="0.7">
                     <animateTransform
                       attributeName="transform"
                       type="rotate"
@@ -268,26 +268,26 @@ export default function LandingPage() {
 
                   <defs>
                     <linearGradient id="outerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#06b6d4" />
-                      <stop offset="50%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#06b6d4" />
+                      <stop offset="0%" stopColor="#1C437E" />
+                      <stop offset="50%" stopColor="#2D5A9E" />
+                      <stop offset="100%" stopColor="#1C437E" />
                     </linearGradient>
                     <linearGradient id="middleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#06b6d4" />
+                      <stop offset="0%" stopColor="#2D5A9E" />
+                      <stop offset="100%" stopColor="#1C437E" />
                     </linearGradient>
                     <radialGradient id="innerGradient" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.4" />
+                      <stop offset="0%" stopColor="#1C437E" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#95BF3D" stopOpacity="0.4" />
                     </radialGradient>
                     <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#ffffff" />
-                      <stop offset="100%" stopColor="#06b6d4" />
+                      <stop offset="100%" stopColor="#1C437E" />
                     </radialGradient>
                   </defs>
                 </svg>
                 <span className="hidden sm:inline">Aurora</span>
-                <span className="text-cyan-600 dark:text-cyan-400 hidden sm:inline">Digital</span>
+                <span className="text-[#1C437E] dark:text-[#4A7BC8] hidden sm:inline">Digital</span>
                 <span className="sm:hidden">Aurora</span>
               </Link>
             </div>
@@ -551,17 +551,17 @@ export default function LandingPage() {
             </g>
             <defs>
               <radialGradient id="particleGradient1" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#06b6d4" stopOpacity="1" />
-                <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
+                <stop offset="0%" stopColor="#1C437E" stopOpacity="1" />
+                <stop offset="100%" stopColor="#1C437E" stopOpacity="0" />
               </radialGradient>
               <radialGradient id="particleGradient2" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#8b5cf6" stopOpacity="1" />
-                <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+                <stop offset="0%" stopColor="#95BF3D" stopOpacity="1" />
+                <stop offset="100%" stopColor="#95BF3D" stopOpacity="0" />
               </radialGradient>
               <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.5" />
-                <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.5" />
+                <stop offset="0%" stopColor="#1C437E" stopOpacity="0.5" />
+                <stop offset="50%" stopColor="#95BF3D" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#1C437E" stopOpacity="0.5" />
               </linearGradient>
             </defs>
           </svg>
@@ -577,8 +577,8 @@ export default function LandingPage() {
             id="hero"
           >
             <div className="flex justify-center mb-6">
-              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2 animate-bounce-subtle">
-                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+              <div className="flex items-center gap-2 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 border border-[#1C437E]/30 dark:border-[#1C437E]/40 rounded-full px-3 sm:px-4 py-2 animate-bounce-subtle">
+                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">
                   50+ Projects Delivered • 6 Expert Developers
                 </span>
@@ -587,10 +587,10 @@ export default function LandingPage() {
 
             {/* Dynamic Hero Title */}
             <h1 className="hero-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6 animate-fade-in-up text-responsive leading-tight">
-              <span className="bg-gradient-to-r from-cyan-600 to-violet-600 bg-clip-text text-transparent relative block sm:inline">
+              <span className="bg-gradient-to-r from-[#1C437E] to-[#2D5A9E] bg-clip-text text-transparent relative block sm:inline">
                 {displayText}
                 <span
-                  className={`inline-block w-0.5 sm:w-1 h-8 sm:h-12 md:h-16 bg-gradient-to-r from-cyan-600 to-violet-600 ml-1 sm:ml-2 ${isTyping ? "animate-pulse" : "opacity-0"}`}
+                  className={`inline-block w-0.5 sm:w-1 h-8 sm:h-12 md:h-16 bg-[#1C437E] ml-1 sm:ml-2 ${isTyping ? "animate-pulse" : "opacity-0"}`}
                 ></span>
               </span>
             </h1>
@@ -603,19 +603,19 @@ export default function LandingPage() {
             {/* Enhanced Stats */}
             <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-6 sm:mb-8 animate-fade-in-up animation-delay-300 px-4 sm:px-0">
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-violet-600 bg-clip-text text-transparent">
+                <div className="text-2xl sm:text-3xl font-bold text-[#1C437E] dark:text-[#4A7BC8]">
                   50+
                 </div>
                 <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Projects Delivered</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-violet-600 to-pink-600 bg-clip-text text-transparent">
+                <div className="text-2xl sm:text-3xl font-bold text-[#1C437E] dark:text-[#4A7BC8]">
                   6
                 </div>
                 <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Expert Developers</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-pink-600 to-cyan-600 bg-clip-text text-transparent">
+                <div className="text-2xl sm:text-3xl font-bold text-[#95BF3D] dark:text-[#A8D04A]">
                   100%
                 </div>
                 <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Client Satisfaction</div>
@@ -659,8 +659,8 @@ export default function LandingPage() {
             </path>
             <defs>
               <linearGradient id="serviceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#8b5cf6" />
-                <stop offset="100%" stopColor="#06b6d4" />
+                <stop offset="0%" stopColor="#2D5A9E" />
+                <stop offset="100%" stopColor="#1C437E" />
               </linearGradient>
             </defs>
           </svg>
@@ -675,8 +675,8 @@ export default function LandingPage() {
             id="services"
           >
             <div className="flex justify-center mb-4">
-              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2">
-                <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-violet-600 dark:text-violet-400 flex-shrink-0" />
+              <div className="flex items-center gap-2 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 border border-[#1C437E]/30 dark:border-[#1C437E]/40 rounded-full px-3 sm:px-4 py-2">
+                <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Our Expertise</span>
               </div>
             </div>
@@ -691,13 +691,13 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 grid-responsive">
             {/* Service 1 - Web Development */}
             <div
-              className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-cyan-500/50 dark:hover:border-cyan-400/50 transition-all duration-500 transform hover:scale-105 ${
+              className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-[#1C437E]/50 dark:hover:border-[#4A7BC8]/50 transition-all duration-500 transform hover:scale-105 ${
                 isVisible.services ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: "100ms" }}
             >
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-cyan-500/10 to-cyan-600/20 dark:from-cyan-400/10 dark:to-cyan-500/20 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
-                <Code className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-600 dark:text-cyan-400" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform border border-[#1C437E]/20">
+                <Code className="w-6 h-6 sm:w-8 sm:h-8 text-[#1C437E] dark:text-[#4A7BC8]" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
                 Web Development
@@ -715,13 +715,13 @@ export default function LandingPage() {
 
             {/* Service 2 - Mobile App Development */}
             <div
-              className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-violet-500/50 dark:hover:border-violet-400/50 transition-all duration-500 transform hover:scale-105 ${
+              className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-[#95BF3D]/50 dark:hover:border-[#A8D04A]/50 transition-all duration-500 transform hover:scale-105 ${
                 isVisible.services ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: "200ms" }}
             >
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-violet-500/10 to-violet-600/20 dark:from-violet-400/10 dark:to-violet-500/20 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
-                <Smartphone className="w-6 h-6 sm:w-8 sm:h-8 text-violet-600 dark:text-violet-400" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform border border-[#1C437E]/20">
+                <Smartphone className="w-6 h-6 sm:w-8 sm:h-8 text-[#1C437E] dark:text-[#4A7BC8]" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
                 Mobile App Development
@@ -739,13 +739,13 @@ export default function LandingPage() {
 
             {/* Service 3 - AI Agents */}
             <div
-              className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-pink-500/50 dark:hover:border-pink-400/50 transition-all duration-500 transform hover:scale-105 ${
+              className={`group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-[#95BF3D]/50 dark:hover:border-[#A8D04A]/50 transition-all duration-500 transform hover:scale-105 ${
                 isVisible.services ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: "300ms" }}
             >
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-pink-500/10 to-pink-600/20 dark:from-pink-400/10 dark:to-pink-500/20 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
-                <Bot className="w-6 h-6 sm:w-8 sm:h-8 text-pink-600 dark:text-pink-400" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#95BF3D]/10 dark:bg-[#95BF3D]/20 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform border border-[#95BF3D]/20">
+                <Bot className="w-6 h-6 sm:w-8 sm:h-8 text-[#95BF3D] dark:text-[#A8D04A]" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
                 AI Agents & Automation
@@ -768,8 +768,8 @@ export default function LandingPage() {
               }`}
               style={{ transitionDelay: "400ms" }}
             >
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-amber-500/10 to-amber-600/20 dark:from-amber-400/10 dark:to-amber-500/20 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
-                <Layers className="w-6 h-6 sm:w-8 sm:h-8 text-amber-600 dark:text-amber-400" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform border border-[#1C437E]/20">
+                <Layers className="w-6 h-6 sm:w-8 sm:h-8 text-[#1C437E] dark:text-[#4A7BC8]" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
                 Full-Stack Solutions
@@ -799,8 +799,8 @@ export default function LandingPage() {
             id="credibility"
           >
             <div className="flex justify-center mb-4">
-              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2">
-                <Users className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+              <div className="flex items-center gap-2 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 border border-[#1C437E]/30 dark:border-[#1C437E]/40 rounded-full px-3 sm:px-4 py-2">
+                <Users className="w-3 h-3 sm:w-4 sm:h-4 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Why Trust Us</span>
               </div>
             </div>
@@ -814,7 +814,7 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 text-center">
-              <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-cyan-600 to-violet-600 bg-clip-text text-transparent mb-3">
+              <div className="text-4xl sm:text-5xl font-bold text-[#1C437E] dark:text-[#4A7BC8] mb-3">
                 50+
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white mb-2">Projects Delivered</h3>
@@ -824,7 +824,7 @@ export default function LandingPage() {
             </div>
 
             <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 text-center">
-              <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-violet-600 to-pink-600 bg-clip-text text-transparent mb-3">
+              <div className="text-4xl sm:text-5xl font-bold text-[#1C437E] dark:text-[#4A7BC8] mb-3">
                 6
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white mb-2">Expert Developers</h3>
@@ -834,7 +834,7 @@ export default function LandingPage() {
             </div>
 
             <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 text-center">
-              <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-pink-600 to-cyan-600 bg-clip-text text-transparent mb-3">
+              <div className="text-4xl sm:text-5xl font-bold text-[#95BF3D] dark:text-[#A8D04A] mb-3">
                 100%
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white mb-2">Client Satisfaction</h3>
@@ -849,19 +849,19 @@ export default function LandingPage() {
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4">Our Expertise</h3>
               <ul className="space-y-3 text-slate-600 dark:text-slate-300">
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0 mt-0.5" />
                   <span>Full-stack web development with Next.js, React, and modern frameworks</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0 mt-0.5" />
                   <span>Native and cross-platform mobile app development</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0 mt-0.5" />
                   <span>AI agent development and intelligent automation systems</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0 mt-0.5" />
                   <span>MVP development and rapid prototyping for startups</span>
                 </li>
               </ul>
@@ -871,19 +871,19 @@ export default function LandingPage() {
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4">What We Deliver</h3>
               <ul className="space-y-3 text-slate-600 dark:text-slate-300">
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-violet-600 dark:text-violet-400 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#95BF3D] dark:text-[#A8D04A] flex-shrink-0 mt-0.5" />
                   <span>Scalable, high-performance applications that grow with your business</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-violet-600 dark:text-violet-400 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#95BF3D] dark:text-[#A8D04A] flex-shrink-0 mt-0.5" />
                   <span>Modern, responsive designs optimized for all devices</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-violet-600 dark:text-violet-400 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#95BF3D] dark:text-[#A8D04A] flex-shrink-0 mt-0.5" />
                   <span>Clean, maintainable code following best practices</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-violet-600 dark:text-violet-400 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#95BF3D] dark:text-[#A8D04A] flex-shrink-0 mt-0.5" />
                   <span>Ongoing support and maintenance for long-term success</span>
                 </li>
               </ul>
@@ -903,8 +903,8 @@ export default function LandingPage() {
             id="featured-projects"
           >
             <div className="flex justify-center mb-4">
-              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2">
-                <Rocket className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+              <div className="flex items-center gap-2 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 border border-[#1C437E]/30 dark:border-[#1C437E]/40 rounded-full px-3 sm:px-4 py-2">
+                <Rocket className="w-3 h-3 sm:w-4 sm:h-4 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Our Work</span>
               </div>
             </div>
@@ -940,7 +940,7 @@ export default function LandingPage() {
                   href="http://bedoraliving.co.uk/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 text-sm font-medium flex items-center gap-2"
+                  className="text-[#1C437E] dark:text-[#4A7BC8] hover:text-[#153A6B] dark:hover:text-[#5A8FD8] text-sm font-medium flex items-center gap-2"
                 >
                   View Project <ArrowRight className="w-4 h-4" />
                 </a>
@@ -971,7 +971,7 @@ export default function LandingPage() {
                   href="https://learnhub-livid.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 text-sm font-medium flex items-center gap-2"
+                  className="text-[#1C437E] dark:text-[#4A7BC8] hover:text-[#153A6B] dark:hover:text-[#5A8FD8] text-sm font-medium flex items-center gap-2"
                 >
                   View Project <ArrowRight className="w-4 h-4" />
                 </a>
@@ -1002,7 +1002,7 @@ export default function LandingPage() {
                   href="https://breastmri-ymdm.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 text-sm font-medium flex items-center gap-2"
+                  className="text-[#1C437E] dark:text-[#4A7BC8] hover:text-[#153A6B] dark:hover:text-[#5A8FD8] text-sm font-medium flex items-center gap-2"
                 >
                   View Project <ArrowRight className="w-4 h-4" />
                 </a>
@@ -1013,7 +1013,7 @@ export default function LandingPage() {
           <div className="text-center mt-8 sm:mt-12">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="inline-flex items-center gap-2 bg-[#1C437E] hover:bg-[#153A6B] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               View All Projects
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -1034,8 +1034,8 @@ export default function LandingPage() {
             id="featured-testimonials"
           >
             <div className="flex justify-center mb-4">
-              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2">
-                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+              <div className="flex items-center gap-2 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 border border-[#1C437E]/30 dark:border-[#1C437E]/40 rounded-full px-3 sm:px-4 py-2">
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Client Reviews</span>
               </div>
             </div>
@@ -1049,10 +1049,10 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Featured Testimonial 1 */}
-            <div className="group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-cyan-300 dark:hover:border-cyan-700 transform hover:-translate-y-2 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-600 via-violet-600 to-pink-600"></div>
+            <div className="group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-[#1C437E]/50 dark:hover:border-[#4A7BC8]/50 transform hover:-translate-y-2 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1C437E] via-[#2D5A9E] to-[#95BF3D]"></div>
               <div className="absolute top-6 right-6 opacity-10 dark:opacity-5">
-                <Quote className="w-16 h-16 text-cyan-600" />
+                <Quote className="w-16 h-16 text-[#1C437E]" />
               </div>
               <div className="relative">
                 <div className="flex items-center gap-1 mb-4">
@@ -1064,7 +1064,7 @@ export default function LandingPage() {
                   "Amazing experience working with this developer! He communicated clearly, stayed proactive throughout the entire project, and delivered results beyond my expectations. He didn't just complete tasks; he improved the design, functionality, and overall quality of my website."
                 </p>
                 <div className="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-600 to-violet-600 flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
+                  <div className="w-12 h-12 rounded-full bg-[#1C437E] flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
                     P
                   </div>
                   <div className="flex-1 min-w-0">
@@ -1081,10 +1081,10 @@ export default function LandingPage() {
             </div>
 
             {/* Featured Testimonial 2 */}
-            <div className="group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-cyan-300 dark:hover:border-cyan-700 transform hover:-translate-y-2 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-600 via-violet-600 to-pink-600"></div>
+            <div className="group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-[#1C437E]/50 dark:hover:border-[#4A7BC8]/50 transform hover:-translate-y-2 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1C437E] via-[#2D5A9E] to-[#95BF3D]"></div>
               <div className="absolute top-6 right-6 opacity-10 dark:opacity-5">
-                <Quote className="w-16 h-16 text-cyan-600" />
+                <Quote className="w-16 h-16 text-[#1C437E]" />
               </div>
               <div className="relative">
                 <div className="flex items-center gap-1 mb-4">
@@ -1096,7 +1096,7 @@ export default function LandingPage() {
                   "This developer is legit one of the best I've worked with on Fiverr. He delivered a fully functional, clean, and professional web app ahead of schedule — with features exactly as I described (and even improved some with his own suggestions). Communication was top-notch, he understood everything quickly, and delivered beyond expectations."
                 </p>
                 <div className="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-600 to-violet-600 flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
+                  <div className="w-12 h-12 rounded-full bg-[#1C437E] flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
                     J
                   </div>
                   <div className="flex-1 min-w-0">
@@ -1113,10 +1113,10 @@ export default function LandingPage() {
             </div>
 
             {/* Featured Testimonial 3 */}
-            <div className="group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-cyan-300 dark:hover:border-cyan-700 transform hover:-translate-y-2 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-600 via-violet-600 to-pink-600"></div>
+            <div className="group bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-slate-200 dark:border-slate-800 transition-all duration-500 hover:shadow-2xl hover:border-[#1C437E]/50 dark:hover:border-[#4A7BC8]/50 transform hover:-translate-y-2 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1C437E] via-[#2D5A9E] to-[#95BF3D]"></div>
               <div className="absolute top-6 right-6 opacity-10 dark:opacity-5">
-                <Quote className="w-16 h-16 text-cyan-600" />
+                <Quote className="w-16 h-16 text-[#1C437E]" />
               </div>
               <div className="relative">
                 <div className="flex items-center gap-1 mb-4">
@@ -1128,7 +1128,7 @@ export default function LandingPage() {
                   "I had the pleasure of working with Abdullah and can confidently say he delivered above and beyond expectations. His professionalism, attention to detail, and dedication to quality work made a huge difference in the success of our project. Abdullah communicates clearly, meets deadlines, and shows genuine care for the project's success."
                 </p>
                 <div className="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-600 to-violet-600 flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
+                  <div className="w-12 h-12 rounded-full bg-[#1C437E] flex items-center justify-center flex-shrink-0 text-white font-bold text-lg">
                     D
                   </div>
                   <div className="flex-1 min-w-0">
@@ -1148,7 +1148,7 @@ export default function LandingPage() {
           <div className="text-center mt-8 sm:mt-12">
             <Link
               href="/testimonials"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="inline-flex items-center gap-2 bg-[#1C437E] hover:bg-[#153A6B] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               View All Reviews
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -1168,8 +1168,8 @@ export default function LandingPage() {
             id="contact"
           >
             <div className="flex justify-center mb-4">
-              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2">
-                <Target className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+              <div className="flex items-center gap-2 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 border border-[#1C437E]/30 dark:border-[#1C437E]/40 rounded-full px-3 sm:px-4 py-2">
+                <Target className="w-3 h-3 sm:w-4 sm:h-4 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Let's Connect</span>
               </div>
             </div>
@@ -1202,7 +1202,7 @@ export default function LandingPage() {
                     id="name"
                     name="name"
                     required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all transform focus:scale-105 text-sm sm:text-base"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-[#1C437E] focus:border-[#1C437E] transition-all transform focus:scale-105 text-sm sm:text-base"
                     placeholder="John Doe"
                     disabled={isSubmitting}
                   />
@@ -1216,7 +1216,7 @@ export default function LandingPage() {
                     id="email"
                     name="email"
                     required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all transform focus:scale-105 text-sm sm:text-base"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-[#1C437E] focus:border-[#1C437E] transition-all transform focus:scale-105 text-sm sm:text-base"
                     placeholder="john@example.com"
                     disabled={isSubmitting}
                   />
@@ -1232,7 +1232,7 @@ export default function LandingPage() {
                   name="project"
                   rows={6}
                   required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all resize-none transform focus:scale-105 text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-[#1C437E] focus:border-[#1C437E] transition-all resize-none transform focus:scale-105 text-sm sm:text-base"
                   placeholder="Tell us about your project, goals, and timeline..."
                   disabled={isSubmitting}
                 ></textarea>
@@ -1242,7 +1242,7 @@ export default function LandingPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-8 sm:px-12 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 btn-responsive disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 mx-auto"
+                  className="bg-[#1C437E] hover:bg-[#153A6B] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-all shadow-lg hover:shadow-xl transform hover:scale-105 btn-responsive disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 mx-auto"
                 >
                   {isSubmitting ? (
                     <>
@@ -1303,19 +1303,19 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-x-3">
             <div className="md:col-span-2">
               <div className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
-                Aurora <span className="text-cyan-400">Digital</span>
+                Aurora <span className="text-[#4A7BC8]">Digital</span>
               </div>
               <p className="text-slate-400 mb-3 sm:mb-4 text-sm sm:text-base max-w-lg">
                 Building the future of web development with AI-powered solutions and human creativity.
               </p>
               <div className="flex space-x-4">
-                <a href="https://github.com/Abdulah-eng/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
+                <a href="https://github.com/Abdulah-eng/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-[#1C437E] dark:hover:text-[#4A7BC8] transition-colors transform hover:scale-110">
                   <Github className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
-                <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
+                <a href="#" className="text-slate-400 hover:text-[#1C437E] dark:hover:text-[#4A7BC8] transition-colors transform hover:scale-110">
                   <Twitter className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
-                <a href="https://www.linkedin.com/in/muhammad-abdullah-575819355" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
+                <a href="https://www.linkedin.com/in/muhammad-abdullah-575819355" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-[#1C437E] dark:hover:text-[#4A7BC8] transition-colors transform hover:scale-110">
                   <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
               </div>

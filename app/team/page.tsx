@@ -27,7 +27,7 @@ const teamMembers = [
     bio: "Expert in building scalable web applications with Next.js and React. Passionate about creating efficient, maintainable code.",
     skills: ["Next.js", "React", "TypeScript", "Node.js"],
     icon: Code,
-    color: "from-cyan-500 to-blue-600",
+    color: "from-[#1C437E] to-[#2D5A9E]",
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ const teamMembers = [
     bio: "Specialized in full-stack development and API design. Delivers high-performance solutions for startups and businesses.",
     skills: ["Next.js", "React", "TypeScript", "API Development"],
     icon: Layers,
-    color: "from-violet-500 to-purple-600",
+    color: "from-[#95BF3D] to-[#A8D04A]",
   },
   {
     id: 3,
@@ -172,7 +172,7 @@ export default function TeamPage() {
                   </circle>
 
                   {/* Orbiting particles */}
-                  <circle cx="26" cy="16" r="1.5" fill="#06b6d4" opacity="0.7">
+                  <circle cx="26" cy="16" r="1.5" fill="#1C437E" opacity="0.7">
                     <animateTransform
                       attributeName="transform"
                       type="rotate"
@@ -183,7 +183,7 @@ export default function TeamPage() {
                     <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite" />
                   </circle>
 
-                  <circle cx="6" cy="16" r="1" fill="#8b5cf6" opacity="0.7">
+                  <circle cx="6" cy="16" r="1" fill="#95BF3D" opacity="0.7">
                     <animateTransform
                       attributeName="transform"
                       type="rotate"
@@ -196,26 +196,26 @@ export default function TeamPage() {
 
                   <defs>
                     <linearGradient id="outerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#06b6d4" />
-                      <stop offset="50%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#06b6d4" />
+                      <stop offset="0%" stopColor="#1C437E" />
+                      <stop offset="50%" stopColor="#2D5A9E" />
+                      <stop offset="100%" stopColor="#1C437E" />
                     </linearGradient>
                     <linearGradient id="middleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#06b6d4" />
+                      <stop offset="0%" stopColor="#2D5A9E" />
+                      <stop offset="100%" stopColor="#1C437E" />
                     </linearGradient>
                     <radialGradient id="innerGradient" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.4" />
+                      <stop offset="0%" stopColor="#1C437E" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#95BF3D" stopOpacity="0.4" />
                     </radialGradient>
                     <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#ffffff" />
-                      <stop offset="100%" stopColor="#06b6d4" />
+                      <stop offset="100%" stopColor="#1C437E" />
                     </radialGradient>
                   </defs>
                 </svg>
                 <span className="hidden sm:inline">Aurora</span>
-                <span className="text-cyan-600 dark:text-cyan-400 hidden sm:inline">Digital</span>
+                <span className="text-[#1C437E] dark:text-[#4A7BC8] hidden sm:inline">Digital</span>
                 <span className="sm:hidden">Aurora</span>
               </Link>
             </div>
@@ -334,14 +334,14 @@ export default function TeamPage() {
             id="hero"
           >
             <div className="flex justify-center mb-6">
-              <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-400/10 dark:to-violet-400/10 border border-cyan-500/20 dark:border-cyan-400/20 rounded-full px-3 sm:px-4 py-2 animate-bounce-subtle">
-                <Users className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+              <div className="flex items-center gap-2 bg-[#1C437E]/10 dark:bg-[#1C437E]/20 border border-[#1C437E]/30 dark:border-[#1C437E]/40 rounded-full px-3 sm:px-4 py-2 animate-bounce-subtle">
+                <Users className="w-3 h-3 sm:w-4 sm:h-4 text-[#1C437E] dark:text-[#4A7BC8] flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">Our Team</span>
               </div>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">
               Meet Our{" "}
-              <span className="bg-gradient-to-r from-cyan-600 to-violet-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#1C437E] to-[#2D5A9E] bg-clip-text text-transparent">
                 Expert Team
               </span>
             </h1>
@@ -390,10 +390,10 @@ export default function TeamPage() {
 
                   {/* Member Content */}
                   <div className="p-6">
-                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-[#1C437E] dark:group-hover:text-[#4A7BC8] transition-colors">
                       {member.name}
                     </h3>
-                    <p className="text-cyan-600 dark:text-cyan-400 font-medium mb-4">{member.role}</p>
+                    <p className="text-[#1C437E] dark:text-[#4A7BC8] font-medium mb-4">{member.role}</p>
                     <p className="text-slate-600 dark:text-slate-300 text-sm mb-4 line-clamp-3">{member.bio}</p>
 
                     {/* Skills */}
@@ -416,7 +416,7 @@ export default function TeamPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-20 bg-gradient-to-r from-cyan-50 to-violet-50 dark:from-slate-900 dark:to-slate-800">
+      <section className="py-12 sm:py-20 bg-[#F5F7FA] dark:from-slate-900 dark:to-slate-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Ready to Work With Us?
@@ -428,7 +428,7 @@ export default function TeamPage() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Link
               href="/#contact"
-              className="bg-gradient-to-r from-cyan-600 to-violet-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:from-cyan-700 hover:to-violet-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 transform hover:scale-105"
+              className="bg-[#1C437E] hover:bg-[#153A6B] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 transform hover:scale-105"
             >
               Get in Touch
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
@@ -443,7 +443,7 @@ export default function TeamPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-x-3">
             <div className="md:col-span-2">
               <div className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
-                Aurora <span className="text-cyan-400">Digital</span>
+                Aurora <span className="text-[#4A7BC8]">Digital</span>
               </div>
               <p className="text-slate-400 mb-3 sm:mb-4 text-sm sm:text-base max-w-lg">
                 Building the future of web development with AI-powered solutions and human creativity.
@@ -453,7 +453,7 @@ export default function TeamPage() {
                   href="https://github.com/Abdulah-eng/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110"
+                  className="text-slate-400 hover:text-[#1C437E] dark:hover:text-[#4A7BC8] transition-colors transform hover:scale-110"
                 >
                   <Github className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
@@ -461,7 +461,7 @@ export default function TeamPage() {
                   href="https://www.linkedin.com/in/muhammad-abdullah-575819355"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-cyan-400 transition-colors transform hover:scale-110"
+                  className="text-slate-400 hover:text-[#1C437E] dark:hover:text-[#4A7BC8] transition-colors transform hover:scale-110"
                 >
                   <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>

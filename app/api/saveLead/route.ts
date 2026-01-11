@@ -25,7 +25,7 @@ async function sendEmailNotification(name: string, email: string, message: strin
             subject: `New Project Inquiry from ${name}`,
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px;">
-                    <h2 style="color: #06b6d4;">New Project Inquiry</h2>
+                    <h2 style="color: #1C437E;">New Project Inquiry</h2>
                     <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px;">
                         <p><strong>Name:</strong> ${name}</p>
                         <p><strong>Email:</strong> ${email}</p>
